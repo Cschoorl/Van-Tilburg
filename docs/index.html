@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="utf-8" />
-  <!-- Fonts: Playfair Display (logo/kopteksten) + Nunito (promoblokken / UI) — Van Tilburg webstijl -->
+  <!-- Van Tilburg voorstel — opbouw naar Josh-V voorstel-template -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
@@ -11,20 +11,16 @@
   <title>Van Tilburg — AI-training Custom GPT’s</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #ffffff;
-      --card: #f4f3ef;
-      --periwinkle: #e4eaf7;
-      --butter: #fdf6e4;
-      --blue-strong: #2b6fd6;
-      --blue-alert: #2563eb;
-      --ink: #1a1814;
-      --muted: #5c5854;
-      --line: #e5e3dd;
-      --display: "Playfair Display", Georgia, "Times New Roman", serif;
-      --accent: "Nunito", system-ui, -apple-system, sans-serif;
+      --bg: #faf8f5;
+      --ink: #1a1a1a;
+      --muted: #8a8580;
+      --line: #e8e4dd;
+      --accent: #b8a98f;
+      --serif: "Cormorant Garamond", "Times New Roman", serif;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,7 +29,7 @@
       height: 100%;
       background: var(--bg);
       color: var(--ink);
-      font-family: var(--display);
+      font-family: var(--serif);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow: hidden;
@@ -65,148 +61,153 @@
 
     .slide-inner {
       width: 100%;
-      max-width: 960px;
+      max-width: 1100px;
       text-align: center;
-      background: var(--card);
-      padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 2.5rem);
-      border: 1px solid var(--line);
-      border-radius: 2px;
-    }
-
-    .title-ribbons {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin: 0 0 clamp(1.5rem, 4vw, 2.5rem);
-      max-width: 100%;
-    }
-
-    .ribbon-lav { background: var(--periwinkle); color: #152a52; }
-    .ribbon-yel { background: var(--butter); color: #3d3428; }
-    .ribbon-blu { background: var(--blue-alert); color: #ffffff; }
-
-    .ribbon {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.85rem 0.5rem;
-      border-radius: 4px;
-    }
-
-    .tilt {
-      font-family: var(--accent);
-      font-weight: 800;
-      font-size: clamp(11px, 1.75vw, 14px);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transform: rotate(-8deg);
-      display: block;
-      line-height: 1.3;
     }
 
     .brand-mark {
       position: fixed;
-      top: 32px;
+      top: 36px;
       left: 50%;
       transform: translateX(-50%);
-      font-family: var(--display);
-      font-size: clamp(13px, 1.35vw, 19px);
-      letter-spacing: 0.42em;
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.45em;
       color: var(--ink);
-      font-weight: 600;
-      text-transform: uppercase;
-      font-style: normal;
+      font-weight: 400;
       z-index: 10;
     }
 
     .eyebrow {
-      font-family: var(--display);
-      font-style: normal;
-      font-weight: 500;
-      font-size: 12px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 14px;
       letter-spacing: 0.32em;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: clamp(2rem, 4vw, 2.75rem);
+      color: var(--ink);
+      margin-bottom: 56px;
     }
 
     h1 {
-      font-family: var(--display);
-      font-style: normal;
-      font-weight: 600;
-      font-size: clamp(36px, 5vw, 68px);
-      line-height: 1.08;
-      letter-spacing: 0.02em;
-      margin-bottom: 24px;
-    }
-
-    h2 {
-      font-family: var(--display);
-      font-style: normal;
-      font-weight: 600;
-      font-size: clamp(28px, 3.8vw, 52px);
-      line-height: 1.18;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(40px, 5.6vw, 78px);
+      line-height: 1.1;
+      letter-spacing: 0.01em;
       margin-bottom: 28px;
     }
 
+    h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(34px, 4.4vw, 60px);
+      line-height: 1.15;
+      margin-bottom: 32px;
+    }
+
     .subtitle {
-      font-family: var(--display);
-      font-style: normal;
-      font-weight: 400;
-      font-size: clamp(17px, 1.45vw, 21px);
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(18px, 1.5vw, 21px);
       color: var(--ink);
-      line-height: 1.55;
+      line-height: 1.5;
       margin-bottom: 0;
-      max-width: 640px;
+      max-width: 720px;
       margin-left: auto;
       margin-right: auto;
     }
 
     .body-text {
-      font-family: var(--display);
+      font-family: var(--sans);
       font-style: normal;
-      font-weight: 600;
-      font-size: 11px;
-      line-height: 1.6;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--muted);
+      font-weight: 300;
+      font-size: clamp(14px, 1.05vw, 16px);
+      line-height: 1.7;
+      color: var(--ink);
       max-width: 580px;
       margin: 0 auto;
+      letter-spacing: 0.01em;
     }
 
     .divider {
-      width: 48px;
-      height: 2px;
-      background: var(--blue-strong);
-      margin: 28px auto;
-      opacity: 0.85;
+      width: 40px;
+      height: 1px;
+      background: var(--ink);
+      margin: 36px auto;
     }
 
     .bullets {
       list-style: none;
-      max-width: 580px;
+      max-width: 620px;
       margin: 0 auto;
       text-align: center;
-      background: #ffffff;
-      border: 1px solid var(--line);
-      padding: 0 8px;
-      border-radius: 2px;
     }
 
     .bullets li {
-      font-family: var(--display);
+      font-family: var(--sans);
       font-style: normal;
-      font-weight: 400;
-      font-size: clamp(15px, 1.12vw, 17px);
-      line-height: 1.55;
-      padding: 18px 14px;
+      font-weight: 300;
+      font-size: clamp(15px, 1.15vw, 17px);
+      line-height: 1.6;
+      padding: 20px 0;
       border-bottom: 1px solid var(--line);
       letter-spacing: 0.01em;
     }
 
     .bullets li:last-child { border-bottom: none; }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      margin: 56px auto 48px;
+      max-width: 980px;
+      text-align: center;
+      position: relative;
+    }
+
+    .phase { padding: 0 12px; }
+
+    .phase .when {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .phase .title {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(22px, 2vw, 28px);
+      margin-bottom: 14px;
+    }
+
+    .phase .desc {
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+
+    .timeline-line {
+      position: absolute;
+      top: 22px;
+      left: 12%;
+      right: 12%;
+      height: 1px;
+      background: var(--line);
+      z-index: 0;
+    }
 
     .two-col {
       display: grid;
@@ -222,24 +223,24 @@
     }
 
     .col h3 {
-      font-family: var(--display);
+      font-family: var(--sans);
       font-style: normal;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 12px;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
-      margin-bottom: 20px;
-      color: var(--muted);
+      margin-bottom: 24px;
+      color: var(--ink);
     }
 
     .col ul { list-style: none; }
 
     .col li {
-      font-family: var(--display);
+      font-family: var(--sans);
       font-style: normal;
-      font-weight: 400;
+      font-weight: 300;
       font-size: clamp(14px, 1.05vw, 16px);
-      line-height: 1.65;
+      line-height: 1.7;
       padding: 12px 0;
       border-bottom: 1px solid var(--line);
       letter-spacing: 0.01em;
@@ -247,60 +248,84 @@
 
     .col li:last-child { border: none; }
 
-    .timeline {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 40px auto 40px;
-      max-width: 880px;
-      text-align: center;
+    .tags {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 40px auto 32px;
+      max-width: 760px;
     }
 
-    .phase {
-      background: #ffffff;
-      border: 1px solid var(--line);
-      padding: 28px 18px;
-      border-radius: 2px;
-    }
-
-    .phase .when {
-      font-family: var(--display);
+    .tag {
+      font-family: var(--sans);
       font-size: 11px;
-      letter-spacing: 0.26em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
+      color: var(--ink);
+      border: 1px solid var(--ink);
+      padding: 10px 22px;
+      font-weight: 400;
+    }
+
+    .teams-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1px;
+      background: var(--line);
+      margin-top: 56px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .team-cell {
+      background: var(--bg);
+      padding: 36px 14px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 140px;
+    }
+
+    .team-cell .num {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.3em;
       color: var(--muted);
       margin-bottom: 14px;
-      font-weight: 500;
     }
 
-    .phase .title {
-      font-family: var(--display);
-      font-style: normal;
-      font-weight: 600;
-      font-size: clamp(20px, 1.9vw, 26px);
-      margin-bottom: 12px;
-      color: var(--ink);
-    }
-
-    .phase .desc {
-      font-family: var(--display);
-      font-style: normal;
+    .team-cell .name {
+      font-family: var(--serif);
+      font-style: italic;
       font-weight: 400;
-      font-size: 14px;
-      line-height: 1.55;
+      font-size: clamp(15px, 1.2vw, 18px);
+      line-height: 1.3;
+    }
+
+    .team-cell.team-cell-open .num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 22px;
+      letter-spacing: 0;
       color: var(--muted);
-      letter-spacing: 0.01em;
+      margin-bottom: 10px;
+    }
+
+    .team-cell.team-cell-open .name {
+      color: var(--muted);
+      font-size: clamp(13px, 1vw, 15px);
     }
 
     .meta {
-      font-family: var(--display);
-      font-style: normal;
-      font-weight: 500;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: none;
-      color: var(--muted);
-      margin-top: 28px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+      margin-top: 32px;
     }
 
     .meta span {
@@ -313,80 +338,31 @@
       margin: 0 4px;
     }
 
-    .result-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 36px;
-      background: transparent;
-      border: none;
-    }
-
-    .result-cell {
-      background: #ffffff;
-      border: 1px solid var(--line);
-      padding: 26px 18px;
-      text-align: center;
-      border-radius: 2px;
-    }
-
-    .result-cell .num {
-      font-family: var(--display);
-      font-size: 10px;
-      letter-spacing: 0.26em;
-      color: var(--muted);
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-
-    .result-cell .name {
-      font-family: var(--display);
-      font-style: normal;
-      font-weight: 600;
-      font-size: clamp(17px, 1.45vw, 21px);
-      line-height: 1.3;
-      margin-bottom: 8px;
-      color: var(--ink);
-    }
-
-    .result-cell .sub {
-      font-family: var(--display);
-      font-weight: 400;
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.5;
-      letter-spacing: 0.01em;
-    }
-
     .hours-block {
       max-width: 520px;
-      margin: 40px auto 0;
+      margin: 48px auto 0;
       text-align: left;
-      background: #ffffff;
-      border: 1px solid var(--line);
-      padding: 16px 20px 8px;
     }
 
     .hours-block > .label {
-      font-family: var(--display);
+      font-family: var(--sans);
       font-size: 11px;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--muted);
       text-align: center;
-      margin-bottom: 16px;
-      font-weight: 600;
+      margin-bottom: 24px;
     }
 
     .hours-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 12px 0;
+      padding: 14px 0;
       border-bottom: 1px solid var(--line);
-      font-family: var(--display);
+      font-family: var(--sans);
       font-style: normal;
-      font-weight: 400;
+      font-weight: 300;
       font-size: clamp(13px, 1vw, 15px);
       line-height: 1.5;
       letter-spacing: 0.01em;
@@ -394,9 +370,7 @@
 
     .hours-row .item { color: var(--ink); }
     .hours-row .value {
-      font-weight: 600;
-      font-family: var(--accent);
-      font-size: 13px;
+      font-weight: 500;
       color: var(--ink);
       white-space: nowrap;
       margin-left: 16px;
@@ -405,64 +379,50 @@
 
     .hours-row.subtotal {
       border-bottom: none;
-      padding-top: 14px;
+      padding-top: 18px;
       margin-top: 4px;
-      border-top: 2px solid var(--blue-strong);
-      font-family: var(--display);
-      font-style: normal;
-      font-weight: 600;
-      font-size: clamp(15px, 1.15vw, 17px);
+      border-top: 1px solid var(--ink);
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(15px, 1.2vw, 17px);
     }
 
-    .hours-row.subtotal .value { font-weight: 700; }
+    .hours-row.subtotal .value { font-weight: 500; }
 
     .hours-row.total-row {
       border-bottom: none;
-      padding-top: 10px;
-      font-family: var(--display);
-      font-style: normal;
-      font-weight: 600;
-      font-size: clamp(16px, 1.25vw, 18px);
+      padding-top: 12px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(16px, 1.3vw, 19px);
     }
 
     .hours-totals {
-      margin-top: 20px;
+      margin-top: 24px;
       text-align: center;
-      font-family: var(--accent);
+      font-family: var(--sans);
       font-style: normal;
-      font-weight: 400;
-      font-size: 11px;
+      font-weight: 300;
+      font-size: 12px;
       color: var(--muted);
-      line-height: 1.8;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .hours-totals .grand {
-      display: block;
-      margin-top: 10px;
-      font-family: var(--display);
-      font-style: normal;
-      font-weight: 500;
-      font-size: clamp(14px, 1.1vw, 16px);
-      color: var(--ink);
-      letter-spacing: 0.02em;
-      text-transform: none;
+      line-height: 1.9;
+      letter-spacing: 0.04em;
     }
 
     .formula-block {
       max-width: 520px;
-      margin: 24px auto 0;
-      padding-top: 8px;
+      margin: 32px auto 0;
     }
 
     .formula-line {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 10px 0;
-      font-family: var(--display);
-      font-weight: 400;
+      padding: 12px 0;
+      font-family: var(--sans);
+      font-weight: 300;
       font-size: clamp(13px, 1vw, 15px);
       line-height: 1.5;
       letter-spacing: 0.01em;
@@ -472,9 +432,7 @@
     .formula-line .calc { color: var(--muted); }
 
     .formula-line .amount {
-      font-weight: 600;
-      font-family: var(--accent);
-      font-size: 13px;
+      font-weight: 500;
       color: var(--ink);
       white-space: nowrap;
       margin-left: 16px;
@@ -485,58 +443,55 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      border-top: 2px solid var(--blue-strong);
-      padding-top: 18px;
-      margin-top: 6px;
+      border-top: 1px solid var(--ink);
+      padding-top: 22px;
+      margin-top: 8px;
     }
 
     .formula-total .label-text {
-      font-family: var(--display);
-      font-style: normal;
-      font-weight: 600;
-      font-size: clamp(17px, 1.45vw, 21px);
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(18px, 1.5vw, 22px);
       color: var(--ink);
     }
 
     .formula-total .amount {
-      font-family: var(--display);
-      font-style: normal;
-      font-weight: 600;
-      font-size: clamp(26px, 2.4vw, 34px);
-      color: var(--blue-strong);
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(28px, 2.6vw, 38px);
+      color: var(--ink);
       line-height: 1;
       font-variant-numeric: tabular-nums;
     }
 
     .slide-closing .closing-line {
-      font-family: var(--display);
+      font-family: var(--sans);
       font-size: 11px;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.5em;
       color: var(--muted);
-      margin-top: 56px;
+      margin-top: 80px;
       text-transform: uppercase;
-      font-weight: 500;
     }
 
     .slide-title .brand-line {
-      font-family: var(--display);
+      font-family: var(--sans);
       font-size: 11px;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.5em;
       color: var(--muted);
-      margin-top: 48px;
-      text-transform: uppercase;
-      font-weight: 500;
+      margin-top: 80px;
     }
 
     .nav {
       position: fixed;
-      bottom: 28px;
+      bottom: 36px;
       left: 0;
       right: 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 40px;
+      padding: 0 48px;
       z-index: 20;
     }
 
@@ -544,52 +499,52 @@
       background: transparent;
       border: none;
       cursor: pointer;
-      font-family: var(--accent);
-      font-style: normal;
-      font-weight: 600;
-      font-size: 11px;
-      letter-spacing: 0.28em;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 14px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--ink);
-      padding: 10px 4px;
-      transition: opacity 0.3s ease, color 0.3s ease;
+      padding: 12px 4px;
+      transition: opacity 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .nav-btn:hover { opacity: 0.55; color: var(--blue-strong); }
-    .nav-btn:disabled { opacity: 0.25; cursor: default; }
+    .nav-btn:hover { opacity: 0.5; }
+    .nav-btn:disabled { opacity: 0.2; cursor: default; }
 
     .nav-btn .arrow {
-      font-family: var(--accent);
-      font-size: 14px;
+      font-family: var(--sans);
+      font-size: 16px;
       font-style: normal;
     }
 
     .counter {
-      font-family: var(--accent);
-      font-size: 10px;
-      letter-spacing: 0.45em;
-      color: var(--muted);
-      font-weight: 600;
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      color: var(--ink);
+      font-weight: 400;
     }
 
-    .counter .total { color: #c9c9c4; }
+    .counter .total { color: var(--muted); }
 
     .progress {
       position: fixed;
-      bottom: 72px;
+      bottom: 80px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 8px;
+      gap: 10px;
       z-index: 20;
     }
 
     .dot {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: var(--line);
       transition: background 0.3s ease, transform 0.3s ease;
@@ -599,24 +554,24 @@
     }
 
     .dot.active {
-      background: var(--blue-strong);
-      transform: scale(1.35);
+      background: var(--ink);
+      transform: scale(1.4);
     }
 
     @media (max-width: 880px) {
       .slide { padding: 9vh 6vw; }
-      .title-ribbons { grid-template-columns: 1fr; gap: 8px; }
-      .ribbon { min-height: 64px; }
+      .teams-grid { grid-template-columns: repeat(2, 1fr); }
       .two-col { grid-template-columns: 1fr; gap: 40px; }
       .col-divider { display: none; }
       .timeline { grid-template-columns: 1fr; gap: 36px; }
-      .result-grid { grid-template-columns: 1fr; }
+      .timeline-line { display: none; }
       .nav { padding: 0 24px; }
-      .brand-mark { top: 22px; font-size: 11px; }
+      .brand-mark { top: 24px; font-size: 10px; }
     }
 
     @media (max-height: 700px) {
       .eyebrow { margin-bottom: 32px; }
+      .teams-grid { margin-top: 36px; }
       .timeline { margin: 36px auto 32px; }
     }
 
@@ -639,126 +594,141 @@
   <div class="deck">
     <div class="brand-mark">VAN TILBURG</div>
 
+    <!-- 1 Titel — zelfde ritme als Josh V -->
     <div class="slide slide-title active">
       <div class="slide-inner">
-        <div class="title-ribbons" aria-hidden="true">
-          <div class="ribbon ribbon-lav"><span class="tilt">32 deelnemers</span></div>
-          <div class="ribbon ribbon-yel"><span class="tilt">2 sessies</span></div>
-          <div class="ribbon ribbon-blu"><span class="tilt">Custom GPT</span></div>
-        </div>
         <p class="eyebrow">— I —</p>
         <h1>AI-training:<br />Custom GPT’s bouwen</h1>
-        <p class="subtitle">Twee sessies voor 32 deelnemers · Praktisch, concreet en toepasbaar op het werk.</p>
+        <p class="subtitle">Twee sessies voor 32 deelnemers. Praktisch en toepasbaar — in kleding, retail en klantcontact.</p>
         <div class="divider"></div>
-        <p class="body-text" style="max-width:480px">VOORSTEL VOOR VAN TILBURG</p>
+        <p class="body-text" style="max-width:420px">VOORSTEL VOOR VAN TILBURG</p>
         <p class="brand-line">Kleding · Brabant</p>
       </div>
     </div>
 
+    <!-- 2 Spanning / context — analoog “De zorg” -->
     <div class="slide">
       <div class="slide-inner">
-        <p class="eyebrow">Waarom</p>
-        <h2>AI omarmen. Wel<br />met dezelfde taal.</h2>
+        <p class="eyebrow">De vraag</p>
+        <h2>AI wil iedereen gebruiken.<br />De gedeelde basis ontbreekt nog.</h2>
         <ul class="bullets">
-          <li>Jullie willen twee verdiepende trainingen voor in totaal 32 mensen</li>
-          <li>Het doel: AI begrijpen én zelf bruikbare Custom GPT’s bouwen voor dagelijkse werkzaamheden</li>
-          <li>Zonder gedeelde basis blijft AI-gebruik versnipperd — kansen en risico’s lopen uiteen</li>
+          <li>De teams zijn enthousiast en willen direct met AI aan de slag</li>
+          <li>Maar zonder gedeelde kaders pakt iedereen het op een eigen manier aan</li>
+          <li>Het risico: wisselende kwaliteit en kansen die niet worden benut</li>
         </ul>
       </div>
     </div>
 
+    <!-- 3 Aanpak — analoog “De aanpak” (één lopende alinea) -->
     <div class="slide">
       <div class="slide-inner">
-        <p class="eyebrow">Opzet</p>
-        <h2>Twee trainingen.<br />Eén traject.</h2>
-        <p class="body-text" style="margin-bottom:32px">Twee sessies van 1,5 tot 2 uur — compact genoeg om in de agenda te passen, ruim genoeg om echt te bouwen.</p>
+        <p class="eyebrow">De aanpak</p>
+        <h2>Twee sessies.<br />Van begrip naar bouwen.</h2>
+        <p class="body-text">Geen theorie-reeks op afstand. We pakken twee beknopte live sessies van 1,5 tot 2 uur — eerst mentale modellen en prompts, daarna hands-on een Custom GPT die past bij jullie werk. Zo ontstaat één gemeenschappelijke taal én een concreet startpunt voor vervolg.</p>
+      </div>
+    </div>
+
+    <!-- 4 Drie blokken — analoog “De dag” (drie kolommen + lijn) -->
+    <div class="slide">
+      <div class="slide-inner">
+        <p class="eyebrow">Het programma</p>
+        <h2>Drie bouwstenen.<br />Eén traject.</h2>
         <div class="timeline">
+          <span class="timeline-line" aria-hidden="true"></span>
           <div class="phase">
             <p class="when">Training 1</p>
-            <p class="title">AI begrijpen &amp; kansen</p>
-            <p class="desc">Begrippen, prompts en herkennen waar waarde zit in kleding, retail, marketing en klantcontact.</p>
+            <p class="title">Begrijpen &amp; kansen</p>
+            <p class="desc">Wat AI en Custom GPT’s zijn voor jullie context. Goede prompts. Waar waarde zit in retail, marketing en service.</p>
           </div>
           <div class="phase">
             <p class="when">Training 2</p>
-            <p class="title">Custom GPT bouwen</p>
-            <p class="desc">Hands-on: opzet, instructies, testen met echte werksituaties, veilig en effectief inzetten.</p>
+            <p class="title">Zelf bouwen</p>
+            <p class="desc">Een GPT opzetten, instructies scherp krijgen en testen met realistische werksituaties — met aandacht voor veilig inzetten.</p>
+          </div>
+          <div class="phase">
+            <p class="when">Na afloop</p>
+            <p class="title">Meenemen</p>
+            <p class="desc">Inzicht in beperkingen en vervolg. Minimaal één werkbaar GPT-concept om door te ontwikkelen.</p>
           </div>
         </div>
         <p class="meta"><span>32 deelnemers</span><span class="sep">·</span><span>2 × 1,5–2 uur</span></p>
       </div>
     </div>
 
+    <!-- 5 Twee kolommen — analoog “Wie doet wat” -->
     <div class="slide">
       <div class="slide-inner">
-        <p class="eyebrow">Training 1</p>
-        <h2>AI begrijpen &amp;<br />kansen herkennen</h2>
-        <ul class="bullets">
-          <li>Wat AI en Custom GPT’s zijn — in jullie context, zonder onnodig jargon</li>
-          <li>Hoe je goede prompts schrijft die betrouwbare, bruikbare output geven</li>
-          <li>Waar AI waarde kan toevoegen: kleding, retail, marketing, klantcontact</li>
-          <li>Welke werkprocessen geschikt zijn om te ondersteunen met een Custom GPT</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="slide">
-      <div class="slide-inner">
-        <p class="eyebrow">Training 2</p>
-        <h2>Zelf een Custom GPT<br />bouwen</h2>
+        <p class="eyebrow">Diepte per sessie</p>
+        <h2>Wat komt op tafel.<br />Per training.</h2>
         <div class="two-col">
           <div class="col">
-            <h3>Hands-on</h3>
+            <h3>Training 1</h3>
             <ul>
-              <li>Zelf een Custom GPT opzetten</li>
-              <li>Instructies schrijven en verbeteren</li>
-              <li>Testen met realistische werksituaties</li>
+              <li>Wat AI en Custom GPT’s zijn — zonder overbodig jargon</li>
+              <li>Hoe je prompts schrijft die betrouwbare output geven</li>
+              <li>Welke processen geschikt zijn om te ondersteunen met een GPT</li>
             </ul>
           </div>
           <div class="col-divider" aria-hidden="true"></div>
           <div class="col">
-            <h3>Afronden</h3>
+            <h3>Training 2</h3>
             <ul>
-              <li>Feedback verwerken in het model</li>
-              <li>Veilig en effectief inzetten in de organisatie</li>
+              <li>Zelf een Custom GPT opzetten en instructies itereren</li>
+              <li>Testen met herkenbare werksituaties uit kleding en retail</li>
+              <li>Feedback verwerken en veilig, effectief inzetten</li>
             </ul>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- 6 Tags + grid — analoog “De afdelingen” -->
     <div class="slide">
       <div class="slide-inner">
-        <p class="eyebrow">Resultaat</p>
-        <h2>Concreet<br />na afloop</h2>
-        <div class="result-grid">
-          <div class="result-cell">
-            <div class="num">01</div>
-            <div class="name">Meer inzicht</div>
-            <div class="sub">AI en Custom GPT’s begrijpen — inclusief beperkingen en kansen.</div>
+        <p class="eyebrow">Jullie context</p>
+        <h2>Waar dit op landt.<br />Per team herkenbaar.</h2>
+        <p class="body-text" style="margin-top:8px">Voorbeelden van domeinen waar we oefeningen en voorbeelden op laten aansluiten — definitieve invulling stemmen we samen af.</p>
+        <div class="tags">
+          <span class="tag">Kleding</span>
+          <span class="tag">Retail</span>
+          <span class="tag">Marketing</span>
+          <span class="tag">Klantcontact</span>
+          <span class="tag">Operationeel</span>
+        </div>
+        <div class="teams-grid">
+          <div class="team-cell">
+            <div class="num">—</div>
+            <div class="name">Shop &amp; winkel</div>
           </div>
-          <div class="result-cell">
-            <div class="num">02</div>
-            <div class="name">Praktische skills</div>
-            <div class="sub">Zelfstandig werken met prompts en een GPT-constructie.</div>
+          <div class="team-cell">
+            <div class="num">—</div>
+            <div class="name">E-commerce</div>
           </div>
-          <div class="result-cell">
-            <div class="num">03</div>
-            <div class="name">Ideeën voor het werk</div>
-            <div class="sub">Toepassingen die aansluiten op eigen taken binnen Van Tilburg.</div>
+          <div class="team-cell">
+            <div class="num">—</div>
+            <div class="name">Merchandise</div>
           </div>
-          <div class="result-cell">
-            <div class="num">04</div>
-            <div class="name">Prototype</div>
-            <div class="sub">Minstens één bruikbaar GPT-concept om verder te ontwikkelen.</div>
+          <div class="team-cell">
+            <div class="num">—</div>
+            <div class="name">Content &amp; brand</div>
+          </div>
+          <div class="team-cell">
+            <div class="num">—</div>
+            <div class="name">Service</div>
+          </div>
+          <div class="team-cell team-cell-open">
+            <div class="num">?</div>
+            <div class="name">Andere afdeling? Voorbeelden — scope in overleg.</div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- 7 Investering — zelfde patroon als Josh (tabel + formule) -->
     <div class="slide">
       <div class="slide-inner">
         <p class="eyebrow">Investering</p>
-        <h2>Heldere opbouw.<br />Eén totaal.</h2>
+        <h2>Per deelnemer opgebouwd.<br />Eén totaalbeeld.</h2>
         <div class="hours-block">
           <div class="label">Specificatie</div>
           <div class="hours-row">
@@ -800,12 +770,13 @@
       </div>
     </div>
 
+    <!-- 8 Afsluiting — analoog “Tot slot” -->
     <div class="slide slide-closing">
       <div class="slide-inner">
         <p class="eyebrow" style="margin-bottom:40px">— TOT SLOT —</p>
-        <h1>Samen de agenda<br />en de teams pakken.</h1>
-        <p class="subtitle" style="margin-top:24px">Laten we data en indeling afstemmen — zodat beide sessies maximaal landen bij Van Tilburg.</p>
-        <p class="closing-line">Neem contact op · we reageren binnen één werkdag</p>
+        <h1>Één traject voor alle teams.<br />Een duidelijke volgende stap.</h1>
+        <p class="subtitle" style="margin-top:24px">Laten we data, groepen en locatie afstemmen — dan plannen we de twee sessies alsof het de volgende collectie-drop is: strak, uitvoerbaar, samen.</p>
+        <p class="closing-line">Klaar om de kalender te pakken?</p>
       </div>
     </div>
   </div>
@@ -836,9 +807,9 @@
         var dot = document.createElement("button");
         dot.className = "dot" + (i === 0 ? " active" : "");
         dot.setAttribute("aria-label", "Ga naar slide " + (i + 1));
-        dot.addEventListener("click", function (j) {
+        dot.addEventListener("click", (function (j) {
           return function () { goTo(j); };
-        }(i));
+        })(i));
         progress.appendChild(dot);
       }
       var dots = progress.querySelectorAll(".dot");
@@ -848,7 +819,8 @@
       }
 
       function update() {
-        for (var i = 0; i < total; i++) {
+        var i;
+        for (i = 0; i < total; i++) {
           slides[i].classList.toggle("active", i === index);
           dots[i].classList.toggle("active", i === index);
         }
