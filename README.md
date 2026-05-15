@@ -28,7 +28,8 @@ Open daarom de **Pages-URL**, of open `index.html` lokaal.
 | ------- | --- |
 | `index.html` | **Hoofdversie** van het deck (nodig voor GitHub Pages: standaardbestand in de root). |
 | `van-tilburg.html` | Korte doorverwijzing naar `index.html` (oude naam / bookmarks). |
-| `docs/index.html` | Zelfde deck als `index.html` — **nodig als** GitHub Pages op **Branch `main` + map `/docs`** staat in plaats van de root. |
+| `docs/index.html` | Spiegel van het deck voor Pages-bron **`main` + `/docs`**. Bijwerken: `./scripts/sync-pages-files.sh` na wijzigingen in `index.html`. |
+| `docs/.nojekyll` | Zet Jekyll uit **als** Pages op **map `/docs`** staat — zonder dit bestand kan de site als “README-site” renderen. |
 | `.nojekyll` | Voorkomt dat GitHub Pages Jekyll op de site loslaat (pure HTML/CSS/JS). |
 
 Geen build-stap: alles zit in de HTML.
@@ -75,8 +76,11 @@ Dan staat óf nog een **oude versie** in je browser/CDN, óf GitHub publiceert *
 
 1. Open **hard** opnieuw: macOS **Cmd+Shift+R**, of gebruik een **privévenster**. Probeer ook de **expliciete URL** met bestandsnaam:  
    `https://cschoorl.github.io/Van-Tilburg/index.html`
-2. Controleer **Settings → Pages**: bron moet **`main` + `/ (root)`** zijn, **of** **GitHub Actions** met een geslaagde workflow-run. Map **`/docs`** leeg laten tenzij je daar het deck bewust neerzet.
-3. Staat er een **Jekyll-thema** gekozen onder Pages? Haal die weg — dit project is **statische HTML** (`index.html` + `.nojekyll`).
+2. Controleer **Settings → Pages**: gebruik **één** van deze bronnen (niet door elkaar):
+   - **`main` + `/ (root)`** — dan telt `index.html` in de **repo-root** (aanbevolen), of
+   - **`main` + `/docs`** — dan telt `docs/index.html` (de map `docs/` is nu een **spiegel** van het deck én bevat **`docs/.nojekyll`** zodat Jekyll géén README als homepage kiest).
+   - **GitHub Actions** — zet Source op **GitHub Actions**; de workflow in `.github/workflows/pages.yml` publiceert `index.html` + `.nojekyll`.
+3. Staat er een **Jekyll-thema** gekozen onder Pages? Haal die weg — dit project is **statische HTML**.
 
 ## Repository
 
@@ -84,4 +88,4 @@ Dan staat óf nog een **oude versie** in je browser/CDN, óf GitHub publiceert *
 
 ---
 
-*Voorstel gericht op Nica van Tilburg — pas inhoud en bedragen aan in **`index.html`** als de scope wijzigt.*
+*Voorstel gericht op Nica van Tilburg — pas inhoud en bedragen aan in **`index.html`** en voer daarna **`./scripts/sync-pages-files.sh`** uit zodat `docs/` gelijk blijft (als je `/docs` als Pages-bron gebruikt).*
