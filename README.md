@@ -45,8 +45,8 @@ Of dubbelklik `index.html` in Finder.
 
 ## Presenteren
 
-- Onderaan: **Vorige** / **Volgende** en teller **01 / 08**; stippen om naar een slide te springen.
-- **Toetsenbord:** pijl links/rechts, spatie, Page Up/Down; `Home` / `End`; cijfers **`1`–`8`** voor een specifieke slide.
+- Onderaan: **Vorige** / **Volgende** en teller **01 / 07**; stippen om naar een slide te springen.
+- **Toetsenbord:** pijl links/rechts, spatie, Page Up/Down; `Home` / `End`; cijfers **`1`–`7`** voor een specifieke slide.
 - **Touch:** swipe links of rechts.
 
 ## PDF

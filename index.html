@@ -136,6 +136,16 @@
       letter-spacing: 0.01em;
     }
 
+    .body-text-wide {
+      max-width: 720px;
+      text-align: left;
+    }
+
+    .slide-inner .body-text-wide {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     .divider {
       width: 40px;
       height: 1px;
@@ -252,77 +262,6 @@
     }
 
     .col li:last-child { border: none; }
-
-    .tags {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin: 40px auto 32px;
-      max-width: 760px;
-    }
-
-    .tag {
-      font-family: var(--ui);
-      font-size: 11px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--ink);
-      border: 1px solid var(--ink);
-      padding: 10px 22px;
-      font-weight: 500;
-    }
-
-    .teams-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 1px;
-      background: var(--line);
-      margin-top: 56px;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .team-cell {
-      background: var(--bg);
-      padding: 36px 14px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 140px;
-    }
-
-    .team-cell .num {
-      font-family: var(--ui);
-      font-size: 11px;
-      letter-spacing: 0.3em;
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
-
-    .team-cell .name {
-      font-family: var(--text);
-      font-style: normal;
-      font-weight: 500;
-      font-size: clamp(15px, 1.2vw, 18px);
-      line-height: 1.35;
-    }
-
-    .team-cell.team-cell-open .num {
-      font-family: var(--display);
-      font-style: normal;
-      font-weight: 500;
-      font-size: 22px;
-      letter-spacing: 0;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .team-cell.team-cell-open .name {
-      color: var(--muted);
-      font-size: clamp(13px, 1vw, 15px);
-    }
 
     .meta {
       font-family: var(--text);
@@ -571,7 +510,6 @@
 
     @media (max-width: 880px) {
       .slide { padding: 9vh 6vw; }
-      .teams-grid { grid-template-columns: repeat(2, 1fr); }
       .two-col { grid-template-columns: 1fr; gap: 40px; }
       .col-divider { display: none; }
       .timeline { grid-template-columns: 1fr; gap: 36px; }
@@ -582,7 +520,6 @@
 
     @media (max-height: 700px) {
       .eyebrow { margin-bottom: 32px; }
-      .teams-grid { margin-top: 36px; }
       .timeline { margin: 36px auto 32px; }
     }
 
@@ -610,7 +547,6 @@
       <div class="slide-inner">
         <p class="eyebrow">— I —</p>
         <h1>AI-training:<br />Custom GPT’s bouwen</h1>
-        <p class="subtitle">Twee sessies voor 32 deelnemers. Praktisch en toepasbaar — in kleding, retail en klantcontact.</p>
         <div class="divider"></div>
         <p class="body-text" style="max-width:420px">VOORSTEL VOOR VAN TILBURG</p>
         <p class="brand-line">Kleding · Brabant</p>
@@ -621,11 +557,11 @@
     <div class="slide">
       <div class="slide-inner">
         <p class="eyebrow">De vraag</p>
-        <h2>AI wil iedereen gebruiken.<br />De gedeelde basis ontbreekt nog.</h2>
+        <h2>Custom GPT’s wil iedereen inzetten.<br />De gedeelde basis ontbreekt nog.</h2>
         <ul class="bullets">
-          <li>De teams zijn enthousiast en willen direct met AI aan de slag</li>
-          <li>Maar zonder gedeelde kaders pakt iedereen het op een eigen manier aan</li>
-          <li>Het risico: wisselende kwaliteit en kansen die niet worden benut</li>
+          <li>Teams willen concrete GPT-assistenten bouwen voor hun werk — maar zonder afspraken schiet elke afdeling op eigen houtje</li>
+          <li>Dan verschillen aanpakken sterk: kwaliteit van instructies, veilig gedrag met data en hoe je een GPT onderhoudbaar maakt</li>
+          <li>Het risico: onbetrouwbare of dubbele oplossingen — terwijl goed gebouwde Custom GPT’s veel repeterend werk consistent kunnen ondersteunen</li>
         </ul>
       </div>
     </div>
@@ -634,8 +570,8 @@
     <div class="slide">
       <div class="slide-inner">
         <p class="eyebrow">De aanpak</p>
-        <h2>Twee sessies.<br />Van begrip naar bouwen.</h2>
-        <p class="body-text">Geen theorie-reeks op afstand. We pakken twee beknopte live sessies van 1,5 tot 2 uur — eerst mentale modellen en prompts, daarna hands-on een Custom GPT die past bij jullie werk. Zo ontstaat één gemeenschappelijke taal én een concreet startpunt voor vervolg.</p>
+        <h2>Twee sessies.<br />Hands-on aan de slag.</h2>
+        <p class="body-text body-text-wide">Geen algemene theorie op afstand, maar twee compacte live sessies voor twee groepen van maximaal 16 deelnemers. In beide sessies gaan we praktisch aan de slag met het maken van Custom GPT&apos;s en verdiepen we de basiskennis rondom AI. Indien gewenst nemen we ook Claude Work/Cowork mee, zodat deelnemers breder leren kijken naar hoe AI-tools hun werk kunnen ondersteunen. Zo ontstaat per groep een gezamenlijke basis én een concreet startpunt om AI direct toe te passen in de praktijk.</p>
       </div>
     </div>
 
@@ -693,49 +629,7 @@
       </div>
     </div>
 
-    <!-- 6 Tags + grid — analoog “De afdelingen” -->
-    <div class="slide">
-      <div class="slide-inner">
-        <p class="eyebrow">Jullie context</p>
-        <h2>Waar dit op landt.<br />Per team herkenbaar.</h2>
-        <p class="body-text" style="margin-top:8px">Voorbeelden van domeinen waar we oefeningen en voorbeelden op laten aansluiten — definitieve invulling stemmen we samen af.</p>
-        <div class="tags">
-          <span class="tag">Kleding</span>
-          <span class="tag">Retail</span>
-          <span class="tag">Marketing</span>
-          <span class="tag">Klantcontact</span>
-          <span class="tag">Operationeel</span>
-        </div>
-        <div class="teams-grid">
-          <div class="team-cell">
-            <div class="num">—</div>
-            <div class="name">Shop &amp; winkel</div>
-          </div>
-          <div class="team-cell">
-            <div class="num">—</div>
-            <div class="name">E-commerce</div>
-          </div>
-          <div class="team-cell">
-            <div class="num">—</div>
-            <div class="name">Merchandise</div>
-          </div>
-          <div class="team-cell">
-            <div class="num">—</div>
-            <div class="name">Content &amp; brand</div>
-          </div>
-          <div class="team-cell">
-            <div class="num">—</div>
-            <div class="name">Service</div>
-          </div>
-          <div class="team-cell team-cell-open">
-            <div class="num">?</div>
-            <div class="name">Andere afdeling? Voorbeelden — scope in overleg.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 7 Investering — zelfde patroon als Josh (tabel + formule) -->
+    <!-- 6 Investering — zelfde patroon als Josh (tabel + formule) -->
     <div class="slide">
       <div class="slide-inner">
         <p class="eyebrow">Investering</p>
@@ -781,7 +675,7 @@
       </div>
     </div>
 
-    <!-- 8 Afsluiting — analoog “Tot slot” -->
+    <!-- 7 Afsluiting — analoog “Tot slot” -->
     <div class="slide slide-closing">
       <div class="slide-inner">
         <p class="eyebrow" style="margin-bottom:40px">— TOT SLOT —</p>
@@ -798,7 +692,7 @@
     <button type="button" class="nav-btn" id="prev" aria-label="Vorige slide">
       <span class="arrow">←</span> Vorige
     </button>
-    <div class="counter"><span id="current">01</span> <span class="total">/ 08</span></div>
+    <div class="counter"><span id="current">01</span> <span class="total">/ 07</span></div>
     <button type="button" class="nav-btn" id="next" aria-label="Volgende slide">
       Volgende <span class="arrow">→</span>
     </button>
