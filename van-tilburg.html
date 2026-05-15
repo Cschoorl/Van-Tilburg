@@ -3,506 +3,820 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI-training · Nica van Tilburg</title>
+  <title>Nica van Tilburg — AI-training Custom GPT’s</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #f7f5f2;
-      --surface: #ffffff;
+      --bg: #faf8f5;
       --ink: #1a1a1a;
-      --muted: #5c5c5c;
-      --line: #e4e0d8;
-      --accent: #2d4a3e;
-      --accent-light: #e8f0ec;
-      --shadow: 0 20px 50px rgba(26, 26, 26, 0.06);
-      --radius: 14px;
+      --muted: #8a8580;
+      --line: #e8e4dd;
+      --accent: #b8a98f;
+      --serif: "Cormorant Garamond", "Times New Roman", serif;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
       height: 100%;
-      overflow: hidden;
       background: var(--bg);
       color: var(--ink);
-      font-family: "DM Sans", system-ui, -apple-system, sans-serif;
-      font-size: clamp(15px, 1.5vw, 18px);
-      line-height: 1.45;
+      font-family: var(--serif);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow: hidden;
     }
 
     .deck {
-      height: 100%;
       position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
     }
 
     .slide {
       position: absolute;
       inset: 0;
-      padding: clamp(1.5rem, 4vw, 3rem);
       display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      max-width: 1100px;
-      margin: 0 auto;
+      padding: 7vh 8vw;
       opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.35s ease;
+      visibility: hidden;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
     }
 
     .slide.active {
       opacity: 1;
-      pointer-events: auto;
+      visibility: visible;
     }
 
-    .label {
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-
-    h1 {
-      font-size: clamp(1.75rem, 4vw, 2.75rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-      max-width: 18ch;
-    }
-
-    h2 {
-      font-size: clamp(1.35rem, 3vw, 2rem);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-    }
-
-    .intro-meta {
-      margin-top: 1.25rem;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .pill {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.45rem 0.85rem;
-      background: var(--accent-light);
-      color: var(--accent);
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-      margin-top: 1.25rem;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 1.25rem 1.35rem;
-      box-shadow: var(--shadow);
-    }
-
-    .card h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--accent);
-    }
-
-    .card p, .card li {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    ul.clean {
-      list-style: none;
-      margin-top: 0.75rem;
-    }
-
-    ul.clean li {
-      position: relative;
-      padding-left: 1.35rem;
-      margin-bottom: 0.55rem;
-      color: var(--muted);
-    }
-
-    ul.clean li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.55em;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      opacity: 0.75;
-    }
-
-    .blocks {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 0.85rem;
-      margin-top: 1rem;
-    }
-
-    .block {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 1rem 1.1rem;
-      min-height: 5.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-
-    .block strong {
-      font-size: 0.85rem;
-      color: var(--ink);
-    }
-
-    .block span {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .price-table {
-      margin-top: 1rem;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      max-width: 520px;
-    }
-
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.75rem 1.1rem;
-      border-bottom: 1px solid var(--line);
-      font-size: 0.95rem;
-    }
-
-    .price-row:last-child {
-      border-bottom: none;
-    }
-
-    .price-row.muted {
-      color: var(--muted);
-    }
-
-    .price-row.total {
-      background: var(--accent-light);
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    .price-row.sub {
-      font-weight: 600;
-    }
-
-    .highlight-box {
-      margin-top: 1.25rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 0.75rem;
-    }
-
-    .mini {
-      background: var(--accent);
-      color: #fff;
-      padding: 1rem 1.15rem;
-      border-radius: var(--radius);
+    .slide-inner {
+      width: 100%;
+      max-width: 1100px;
       text-align: center;
     }
 
-    .mini .big {
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .mini .small {
-      font-size: 0.8rem;
-      opacity: 0.92;
-      margin-top: 0.25rem;
-    }
-
-    .foot {
+    .brand-mark {
       position: fixed;
-      bottom: 0;
+      top: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.45em;
+      color: var(--ink);
+      font-weight: 400;
+      z-index: 10;
+    }
+
+    .eyebrow {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 56px;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(40px, 5.6vw, 78px);
+      line-height: 1.1;
+      letter-spacing: 0.01em;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(34px, 4.4vw, 60px);
+      line-height: 1.15;
+      margin-bottom: 32px;
+    }
+
+    .subtitle {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(18px, 1.5vw, 21px);
+      color: var(--ink);
+      line-height: 1.5;
+      margin-bottom: 0;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .body-text {
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 300;
+      font-size: clamp(14px, 1.05vw, 16px);
+      line-height: 1.7;
+      color: var(--ink);
+      max-width: 580px;
+      margin: 0 auto;
+      letter-spacing: 0.01em;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--ink);
+      margin: 36px auto;
+    }
+
+    .bullets {
+      list-style: none;
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .bullets li {
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 300;
+      font-size: clamp(15px, 1.15vw, 17px);
+      line-height: 1.6;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+      letter-spacing: 0.01em;
+    }
+
+    .bullets li:last-child { border-bottom: none; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 60px;
+      margin-top: 48px;
+      text-align: left;
+    }
+
+    .col-divider {
+      background: var(--line);
+      width: 1px;
+    }
+
+    .col h3 {
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      color: var(--ink);
+    }
+
+    .col ul { list-style: none; }
+
+    .col li {
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 300;
+      font-size: clamp(14px, 1.05vw, 16px);
+      line-height: 1.7;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      letter-spacing: 0.01em;
+    }
+
+    .col li:last-child { border: none; }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin: 56px auto 48px;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    .phase .when {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .phase .title {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(22px, 2vw, 28px);
+      margin-bottom: 14px;
+    }
+
+    .phase .desc {
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+
+    .meta {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+      margin-top: 32px;
+    }
+
+    .meta span {
+      display: inline-block;
+      margin: 0 18px;
+    }
+
+    .meta .sep {
+      color: var(--muted);
+      margin: 0 4px;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--line);
+      margin-top: 56px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .result-cell {
+      background: var(--bg);
+      padding: 36px 22px;
+      text-align: center;
+    }
+
+    .result-cell .num {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .result-cell .name {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(18px, 1.5vw, 22px);
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .result-cell .sub {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      letter-spacing: 0.01em;
+    }
+
+    .hours-block {
+      max-width: 520px;
+      margin: 48px auto 0;
+      text-align: left;
+    }
+
+    .hours-block > .label {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 300;
+      font-size: clamp(13px, 1vw, 15px);
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+    }
+
+    .hours-row .item { color: var(--ink); }
+    .hours-row .value {
+      font-weight: 500;
+      color: var(--ink);
+      white-space: nowrap;
+      margin-left: 16px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hours-row.subtotal {
+      border-bottom: none;
+      padding-top: 18px;
+      margin-top: 4px;
+      border-top: 1px solid var(--ink);
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(15px, 1.2vw, 17px);
+    }
+
+    .hours-row.subtotal .value { font-weight: 500; }
+
+    .hours-row.total-row {
+      border-bottom: none;
+      padding-top: 12px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(16px, 1.3vw, 19px);
+    }
+
+    .hours-totals {
+      margin-top: 28px;
+      text-align: center;
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 300;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.9;
+      letter-spacing: 0.04em;
+    }
+
+    .hours-totals .grand {
+      display: block;
+      margin-top: 14px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(15px, 1.2vw, 17px);
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .formula-block {
+      max-width: 520px;
+      margin: 32px auto 0;
+    }
+
+    .formula-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 12px 0;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: clamp(13px, 1vw, 15px);
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+
+    .formula-line .calc { color: var(--muted); }
+
+    .formula-line .amount {
+      font-weight: 500;
+      color: var(--ink);
+      white-space: nowrap;
+      margin-left: 16px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .formula-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-top: 1px solid var(--ink);
+      padding-top: 22px;
+      margin-top: 8px;
+    }
+
+    .formula-total .label-text {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(18px, 1.5vw, 22px);
+      color: var(--ink);
+    }
+
+    .formula-total .amount {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(28px, 2.6vw, 38px);
+      color: var(--ink);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .slide-closing .closing-line {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      color: var(--muted);
+      margin-top: 80px;
+      text-transform: uppercase;
+    }
+
+    .slide-title .brand-line {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      color: var(--muted);
+      margin-top: 80px;
+    }
+
+    .nav {
+      position: fixed;
+      bottom: 36px;
       left: 0;
       right: 0;
-      padding: 0.75rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.8rem;
-      color: var(--muted);
-      background: linear-gradient(to top, var(--bg), transparent);
-      pointer-events: none;
+      padding: 0 48px;
+      z-index: 20;
     }
 
-    .dots {
+    .nav-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding: 12px 4px;
+      transition: opacity 0.3s ease;
       display: flex;
-      gap: 0.35rem;
+      align-items: center;
+      gap: 12px;
     }
 
-    .dots span {
-      width: 6px;
-      height: 6px;
+    .nav-btn:hover { opacity: 0.5; }
+    .nav-btn:disabled { opacity: 0.2; cursor: default; }
+
+    .nav-btn .arrow {
+      font-family: var(--sans);
+      font-size: 16px;
+      font-style: normal;
+    }
+
+    .counter {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    .counter .total { color: var(--muted); }
+
+    .progress {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 20;
+    }
+
+    .dot {
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: var(--line);
+      transition: background 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+      border: none;
+      padding: 0;
     }
 
-    .dots span.on {
-      background: var(--accent);
+    .dot.active {
+      background: var(--ink);
+      transform: scale(1.4);
     }
 
-    .kbd-hint {
-      opacity: 0.7;
+    @media (max-width: 880px) {
+      .slide { padding: 9vh 6vw; }
+      .two-col { grid-template-columns: 1fr; gap: 40px; }
+      .col-divider { display: none; }
+      .timeline { grid-template-columns: 1fr; gap: 36px; }
+      .result-grid { grid-template-columns: 1fr; }
+      .nav { padding: 0 24px; }
+      .brand-mark { top: 24px; font-size: 10px; }
+    }
+
+    @media (max-height: 700px) {
+      .eyebrow { margin-bottom: 32px; }
+      .timeline { margin: 36px auto 32px; }
     }
 
     @media print {
       html, body { overflow: visible; height: auto; }
+      .deck { height: auto; min-height: 100vh; }
       .slide {
         position: relative;
         page-break-after: always;
         min-height: 100vh;
         opacity: 1 !important;
-        pointer-events: auto;
+        visibility: visible !important;
+        padding: 10vh 8vw;
       }
-      .foot { display: none; }
+      .brand-mark, .nav, .progress { position: absolute; visibility: hidden; }
     }
   </style>
 </head>
 <body>
-  <div class="deck" id="deck">
-    <!-- 1 -->
-    <section class="slide active" data-i="0">
-      <p class="label">Voorstel</p>
-      <h1>AI-training: Custom GPT’s bouwen voor Nica van Tilburg</h1>
-      <p class="intro-meta">Kledingbedrijf · Brabant</p>
-      <span class="pill">Twee interactieve sessies · praktisch en toepasbaar</span>
-    </section>
+  <div class="deck">
+    <div class="brand-mark">NICA VAN TILBURG</div>
 
-    <!-- 2 -->
-    <section class="slide" data-i="1">
-      <p class="label">Context</p>
-      <h2>Waarom deze AI-training?</h2>
-      <div class="grid-2">
-        <div class="card">
-          <h3>Ambitie</h3>
-          <p>Nica van Tilburg wil <strong style="color:var(--ink)">twee verdiepende trainingen</strong> voor in totaal <strong style="color:var(--ink)">32 deelnemers</strong>—met focus op begrip én doen.</p>
+    <div class="slide slide-title active">
+      <div class="slide-inner">
+        <p class="eyebrow">— I —</p>
+        <h1>AI-training:<br />Custom GPT’s bouwen</h1>
+        <p class="subtitle">Twee sessies voor 32 deelnemers · Praktisch, concreet en toepasbaar op het werk.</p>
+        <div class="divider"></div>
+        <p class="body-text" style="max-width:420px">VOORSTEL VOOR NICA VAN TILBURG</p>
+        <p class="brand-line">Kleding · Brabant</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-inner">
+        <p class="eyebrow">Waarom</p>
+        <h2>AI omarmen. Wel<br />met dezelfde taal.</h2>
+        <ul class="bullets">
+          <li>Jullie willen twee verdiepende trainingen voor in totaal 32 mensen</li>
+          <li>Het doel: AI begrijpen én zelf bruikbare Custom GPT’s bouwen voor dagelijkse werkzaamheden</li>
+          <li>Zonder gedeelde basis blijft AI-gebruik versnipperd — kansen en risico’s lopen uiteen</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-inner">
+        <p class="eyebrow">Opzet</p>
+        <h2>Twee trainingen.<br />Eén traject.</h2>
+        <p class="body-text" style="margin-bottom:32px">Twee sessies van 1,5 tot 2 uur — compact genoeg om in de agenda te passen, ruim genoeg om echt te bouwen.</p>
+        <div class="timeline">
+          <div class="phase">
+            <p class="when">Training 1</p>
+            <p class="title">AI begrijpen &amp; kansen</p>
+            <p class="desc">Begrippen, prompts en herkennen waar waarde zit in kleding, retail, marketing en klantcontact.</p>
+          </div>
+          <div class="phase">
+            <p class="when">Training 2</p>
+            <p class="title">Custom GPT bouwen</p>
+            <p class="desc">Hands-on: opzet, instructies, testen met echte werksituaties, veilig en effectief inzetten.</p>
+          </div>
         </div>
-        <div class="card">
-          <h3>Doel</h3>
-          <p>Deelnemers leren AI beter begrijpen en zelf <strong style="color:var(--ink)">Custom GPT’s</strong> bouwen die direct bruikbaar zijn in het <strong style="color:var(--ink)">dagelijkse werk</strong>.</p>
+        <p class="meta"><span>32 deelnemers</span><span class="sep">·</span><span>2 × 1,5–2 uur</span></p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-inner">
+        <p class="eyebrow">Training 1</p>
+        <h2>AI begrijpen &amp;<br />kansen herkennen</h2>
+        <ul class="bullets">
+          <li>Wat AI en Custom GPT’s zijn — in jullie context, zonder onnodig jargon</li>
+          <li>Hoe je goede prompts schrijft die betrouwbare, bruikbare output geven</li>
+          <li>Waar AI waarde kan toevoegen: kleding, retail, marketing, klantcontact</li>
+          <li>Welke werkprocessen geschikt zijn om te ondersteunen met een Custom GPT</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-inner">
+        <p class="eyebrow">Training 2</p>
+        <h2>Zelf een Custom GPT<br />bouwen</h2>
+        <div class="two-col">
+          <div class="col">
+            <h3>Hands-on</h3>
+            <ul>
+              <li>Zelf een Custom GPT opzetten</li>
+              <li>Instructies schrijven en verbeteren</li>
+              <li>Testen met realistische werksituaties</li>
+            </ul>
+          </div>
+          <div class="col-divider" aria-hidden="true"></div>
+          <div class="col">
+            <h3>Afronden</h3>
+            <ul>
+              <li>Feedback verwerken in het model</li>
+              <li>Veilig en effectief inzetten in de organisatie</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- 3 -->
-    <section class="slide" data-i="2">
-      <p class="label">Programma</p>
-      <h2>Opzet van de twee trainingen</h2>
-      <div class="blocks">
-        <div class="block">
-          <strong>Duur</strong>
-          <span>Twee sessies van 1,5 tot 2 uur per training—compact en praktisch.</span>
-        </div>
-        <div class="block">
-          <strong>Training 1</strong>
-          <span>AI begrijpen en kansen herkennen binnen jullie context.</span>
-        </div>
-        <div class="block">
-          <strong>Training 2</strong>
-          <span>Zelf aan de slag: een Custom GPT opzetten en verbeteren.</span>
+    <div class="slide">
+      <div class="slide-inner">
+        <p class="eyebrow">Resultaat</p>
+        <h2>Concreet<br />na afloop</h2>
+        <div class="result-grid">
+          <div class="result-cell">
+            <div class="num">01</div>
+            <div class="name">Meer inzicht</div>
+            <div class="sub">AI en Custom GPT’s begrijpen — inclusief beperkingen en kansen.</div>
+          </div>
+          <div class="result-cell">
+            <div class="num">02</div>
+            <div class="name">Praktische skills</div>
+            <div class="sub">Zelfstandig werken met prompts en een GPT-constructie.</div>
+          </div>
+          <div class="result-cell">
+            <div class="num">03</div>
+            <div class="name">Ideeën voor het werk</div>
+            <div class="sub">Toepassingen die aansluiten op eigen taken binnen Nica.</div>
+          </div>
+          <div class="result-cell">
+            <div class="num">04</div>
+            <div class="name">Prototype</div>
+            <div class="sub">Minstens één bruikbaar GPT-concept om verder te ontwikkelen.</div>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- 4 -->
-    <section class="slide" data-i="3">
-      <p class="label">Sessie 1</p>
-      <h2>AI begrijpen &amp; kansen herkennen</h2>
-      <ul class="clean">
-        <li>Wat AI en Custom GPT’s zijn—zonder jargon.</li>
-        <li>Hoe je <strong style="color:var(--ink)">goede prompts</strong> schrijft die betrouwbare output geven.</li>
-        <li>Waar AI waarde toevoegt in <strong style="color:var(--ink)">kleding, retail, marketing en klantcontact</strong>.</li>
-        <li>Welke werkprocessen geschikt zijn om te ondersteunen met een Custom GPT.</li>
-      </ul>
-    </section>
-
-    <!-- 5 -->
-    <section class="slide" data-i="4">
-      <p class="label">Sessie 2</p>
-      <h2>Zelf een Custom GPT bouwen</h2>
-      <div class="grid-2" style="margin-top:0.5rem">
-        <div class="card">
-          <h3>Hands-on</h3>
-          <ul class="clean" style="margin-top:0">
-            <li>Zelf een Custom GPT opzetten</li>
-            <li>Instructies schrijven en iteratief verbeteren</li>
-            <li>Testen met realistische werksituaties</li>
-          </ul>
+    <div class="slide">
+      <div class="slide-inner">
+        <p class="eyebrow">Investering</p>
+        <h2>Heldere opbouw.<br />Eén totaal.</h2>
+        <div class="hours-block">
+          <div class="label">Specificatie</div>
+          <div class="hours-row">
+            <span class="item">32 deelnemers × €50,00 p.p. (excl. btw)</span>
+            <span class="value">€&nbsp;1.600,00</span>
+          </div>
+          <div class="hours-row">
+            <span class="item">Reiskosten (excl. btw)</span>
+            <span class="value">€&nbsp;64,00</span>
+          </div>
+          <div class="hours-row subtotal">
+            <span class="item">Subtotaal excl. btw</span>
+            <span class="value">€&nbsp;1.664,00</span>
+          </div>
+          <div class="hours-row">
+            <span class="item">Btw 21%</span>
+            <span class="value">€&nbsp;349,44</span>
+          </div>
+          <div class="hours-row total-row">
+            <span class="item">Totaal incl. btw</span>
+            <span class="value">€&nbsp;2.013,44</span>
+          </div>
         </div>
-        <div class="card">
-          <h3>Professionaliseren</h3>
-          <ul class="clean" style="margin-top:0">
-            <li>Feedback verwerken in het model</li>
-            <li>Veilig en effectief inzetten in de organisatie</li>
-          </ul>
+        <div class="formula-block">
+          <div class="formula-line">
+            <span class="calc">Per persoon excl. btw (incl. reiskosten)</span>
+            <span class="amount">€&nbsp;52,00</span>
+          </div>
+          <div class="formula-line">
+            <span class="calc">Per persoon incl. btw</span>
+            <span class="amount">€&nbsp;62,92</span>
+          </div>
+          <div class="formula-total">
+            <span class="label-text">Trainingen totaal (excl. btw)</span>
+            <span class="amount">€&nbsp;1.600,00</span>
+          </div>
         </div>
+        <p class="hours-totals">Bedragen in euro · voorstel onder voorbehoud van definitieve planning</p>
       </div>
-    </section>
+    </div>
 
-    <!-- 6 -->
-    <section class="slide" data-i="5">
-      <p class="label">Resultaat</p>
-      <h2>Verwacht resultaat voor deelnemers</h2>
-      <div class="blocks">
-        <div class="block">
-          <strong>Inzicht</strong>
-          <span>Meer begrip van AI en wat Custom GPT’s wél en niet kunnen.</span>
-        </div>
-        <div class="block">
-          <strong>Vaardigheid</strong>
-          <span>Praktisch zelf aan de slag met prompts en GPT-opzet.</span>
-        </div>
-        <div class="block">
-          <strong>Toepassing</strong>
-          <span>Concrete ideeën voor eigen werk binnen Nica van Tilburg.</span>
-        </div>
-        <div class="block">
-          <strong>Prototype</strong>
-          <span>Minstens één bruikbaar GPT-concept om verder mee te ontwikkelen.</span>
-        </div>
+    <div class="slide slide-closing">
+      <div class="slide-inner">
+        <p class="eyebrow" style="margin-bottom:40px">— TOT SLOT —</p>
+        <h1>Samen de agenda<br />en de teams pakken.</h1>
+        <p class="subtitle" style="margin-top:24px">Laten we data en indeling afstemmen — zodat beide sessies maximaal landen bij Nica van Tilburg.</p>
+        <p class="closing-line">Neem contact op · we reageren binnen één werkdag</p>
       </div>
-    </section>
-
-    <!-- 7 -->
-    <section class="slide" data-i="6">
-      <p class="label">Investering</p>
-      <h2>Prijsopbouw</h2>
-      <div class="price-table">
-        <div class="price-row muted">
-          <span>32 deelnemers × €50,00 p.p.</span>
-          <span>€&nbsp;1.600,00</span>
-        </div>
-        <div class="price-row muted">
-          <span>Reiskosten</span>
-          <span>€&nbsp;64,00</span>
-        </div>
-        <div class="price-row sub">
-          <span>Subtotaal excl. btw</span>
-          <span>€&nbsp;1.664,00</span>
-        </div>
-        <div class="price-row muted">
-          <span>Btw 21%</span>
-          <span>€&nbsp;349,44</span>
-        </div>
-        <div class="price-row total">
-          <span>Totaal incl. btw</span>
-          <span>€&nbsp;2.013,44</span>
-        </div>
-      </div>
-      <div class="highlight-box">
-        <div class="mini">
-          <div class="big">€&nbsp;52,00</div>
-          <div class="small">per persoon excl. btw<br />(incl. reiskosten)</div>
-        </div>
-        <div class="mini">
-          <div class="big">€&nbsp;62,92</div>
-          <div class="small">per persoon incl. btw</div>
-        </div>
-      </div>
-      <p style="margin-top:1rem;font-size:0.9rem;color:var(--muted)">Alle bedragen exclusief tenzij anders vermeld. Trainingen totaal excl. btw: €&nbsp;1.600,00.</p>
-    </section>
-
-    <!-- 8 -->
-    <section class="slide" data-i="7">
-      <p class="label">Volgende stap</p>
-      <h2>Plan de trainingen in overleg</h2>
-      <p style="max-width:42ch;color:var(--muted);margin-top:0.75rem">
-        Laten we data en groepsindeling afstemmen—zodat beide sessies naadloos aansluiten op jullie agenda en teams.
-      </p>
-      <span class="pill" style="margin-top:1.5rem">Bel of mail voor een korte afspraak · we reageren binnen één werkdag</span>
-    </section>
+    </div>
   </div>
 
-  <div class="foot">
-    <span class="kbd-hint">← → of spatie · 1–8</span>
-    <div class="dots" id="dots" aria-hidden="true"></div>
-    <span>Nica van Tilburg · AI-training</span>
-  </div>
+  <div class="progress" id="progress" role="tablist" aria-label="Slides"></div>
+
+  <nav class="nav" aria-label="Slide navigatie">
+    <button type="button" class="nav-btn" id="prev" aria-label="Vorige slide">
+      <span class="arrow">←</span> Vorige
+    </button>
+    <div class="counter"><span id="current">01</span> <span class="total">/ 08</span></div>
+    <button type="button" class="nav-btn" id="next" aria-label="Volgende slide">
+      Volgende <span class="arrow">→</span>
+    </button>
+  </nav>
 
   <script>
     (function () {
-      var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
-      var n = slides.length;
-      var i = 0;
-      var dots = document.getElementById("dots");
+      var slides = document.querySelectorAll(".slide");
+      var total = slides.length;
+      var prevBtn = document.getElementById("prev");
+      var nextBtn = document.getElementById("next");
+      var currentEl = document.getElementById("current");
+      var progress = document.getElementById("progress");
+      var index = 0;
 
-      for (var d = 0; d < n; d++) {
-        var s = document.createElement("span");
-        if (d === 0) s.className = "on";
-        dots.appendChild(s);
+      for (var i = 0; i < total; i++) {
+        var dot = document.createElement("button");
+        dot.className = "dot" + (i === 0 ? " active" : "");
+        dot.setAttribute("aria-label", "Ga naar slide " + (i + 1));
+        dot.addEventListener("click", function (j) {
+          return function () { goTo(j); };
+        }(i));
+        progress.appendChild(dot);
+      }
+      var dots = progress.querySelectorAll(".dot");
+
+      function pad(n) {
+        return String(n).length < 2 ? "0" + n : String(n);
       }
 
-      function show(idx) {
-        i = (idx + n) % n;
-        slides.forEach(function (el, j) {
-          el.classList.toggle("active", j === i);
-        });
-        Array.prototype.forEach.call(dots.children, function (dot, j) {
-          dot.classList.toggle("on", j === i);
-        });
+      function update() {
+        for (var i = 0; i < total; i++) {
+          slides[i].classList.toggle("active", i === index);
+          dots[i].classList.toggle("active", i === index);
+        }
+        currentEl.textContent = pad(index + 1);
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === total - 1;
       }
+
+      function goTo(i) {
+        if (i < 0 || i >= total) return;
+        index = i;
+        update();
+      }
+
+      function next() { goTo(index + 1); }
+      function prev() { goTo(index - 1); }
+
+      prevBtn.addEventListener("click", prev);
+      nextBtn.addEventListener("click", next);
 
       document.addEventListener("keydown", function (e) {
         if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
           e.preventDefault();
-          show(i + 1);
+          next();
         } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
           e.preventDefault();
-          show(i - 1);
+          prev();
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          goTo(0);
+        } else if (e.key === "End") {
+          e.preventDefault();
+          goTo(total - 1);
         } else if (e.key >= "1" && e.key <= "9") {
           var num = parseInt(e.key, 10) - 1;
-          if (num < n) show(num);
-        } else if (e.key === "Home") {
-          show(0);
-        } else if (e.key === "End") {
-          show(n - 1);
+          if (num < total) {
+            e.preventDefault();
+            goTo(num);
+          }
         }
       });
 
-      var startX = null;
+      var touchStartX = 0;
       document.addEventListener("touchstart", function (e) {
-        startX = e.changedTouches[0].screenX;
+        touchStartX = e.changedTouches[0].clientX;
       }, { passive: true });
       document.addEventListener("touchend", function (e) {
-        if (startX == null) return;
-        var endX = e.changedTouches[0].screenX;
-        var dx = endX - startX;
-        if (Math.abs(dx) > 50) show(dx < 0 ? i + 1 : i - 1);
-        startX = null;
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) {
+          if (dx < 0) next();
+          else prev();
+        }
       }, { passive: true });
+
+      update();
     })();
   </script>
 </body>
