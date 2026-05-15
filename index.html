@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nica van Tilburg — AI-training Custom GPT’s</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #faf8f5;
+      --ink: #1a1a1a;
+      --muted: #8a8580;
+      --line: #e8e4dd;
+      --accent: #b8a98f;
+      --serif: "Cormorant Garamond", "Times New Roman", serif;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--serif);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow: hidden;
+    }
+
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7vh 8vw;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .slide-inner {
+      width: 100%;
+      max-width: 1100px;
+      text-align: center;
+    }
+
+    .brand-mark {
+      position: fixed;
+      top: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.45em;
+      color: var(--ink);
+      font-weight: 400;
+      z-index: 10;
+    }
+
+    .eyebrow {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 14px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 56px;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(40px, 5.6vw, 78px);
+      line-height: 1.1;
+      letter-spacing: 0.01em;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(34px, 4.4vw, 60px);
+      line-height: 1.15;
+      margin-bottom: 32px;
+    }
+
+    .subtitle {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(18px, 1.5vw, 21px);
+      color: var(--ink);
+      line-height: 1.5;
+      margin-bottom: 0;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .body-text {
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 300;
+      font-size: clamp(14px, 1.05vw, 16px);
+      line-height: 1.7;
+      color: var(--ink);
+      max-width: 580px;
+      margin: 0 auto;
+      letter-spacing: 0.01em;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--ink);
+      margin: 36px auto;
+    }
+
+    .bullets {
+      list-style: none;
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .bullets li {
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 300;
+      font-size: clamp(15px, 1.15vw, 17px);
+      line-height: 1.6;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+      letter-spacing: 0.01em;
+    }
+
+    .bullets li:last-child { border-bottom: none; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 60px;
+      margin-top: 48px;
+      text-align: left;
+    }
+
+    .col-divider {
+      background: var(--line);
+      width: 1px;
+    }
+
+    .col h3 {
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      color: var(--ink);
+    }
+
+    .col ul { list-style: none; }
+
+    .col li {
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 300;
+      font-size: clamp(14px, 1.05vw, 16px);
+      line-height: 1.7;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      letter-spacing: 0.01em;
+    }
+
+    .col li:last-child { border: none; }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin: 56px auto 48px;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    .phase .when {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .phase .title {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(22px, 2vw, 28px);
+      margin-bottom: 14px;
+    }
+
+    .phase .desc {
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+
+    .meta {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+      margin-top: 32px;
+    }
+
+    .meta span {
+      display: inline-block;
+      margin: 0 18px;
+    }
+
+    .meta .sep {
+      color: var(--muted);
+      margin: 0 4px;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--line);
+      margin-top: 56px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .result-cell {
+      background: var(--bg);
+      padding: 36px 22px;
+      text-align: center;
+    }
+
+    .result-cell .num {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .result-cell .name {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(18px, 1.5vw, 22px);
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .result-cell .sub {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      letter-spacing: 0.01em;
+    }
+
+    .hours-block {
+      max-width: 520px;
+      margin: 48px auto 0;
+      text-align: left;
+    }
+
+    .hours-block > .label {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 300;
+      font-size: clamp(13px, 1vw, 15px);
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+    }
+
+    .hours-row .item { color: var(--ink); }
+    .hours-row .value {
+      font-weight: 500;
+      color: var(--ink);
+      white-space: nowrap;
+      margin-left: 16px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hours-row.subtotal {
+      border-bottom: none;
+      padding-top: 18px;
+      margin-top: 4px;
+      border-top: 1px solid var(--ink);
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(15px, 1.2vw, 17px);
+    }
+
+    .hours-row.subtotal .value { font-weight: 500; }
+
+    .hours-row.total-row {
+      border-bottom: none;
+      padding-top: 12px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(16px, 1.3vw, 19px);
+    }
+
+    .hours-totals {
+      margin-top: 28px;
+      text-align: center;
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 300;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.9;
+      letter-spacing: 0.04em;
+    }
+
+    .hours-totals .grand {
+      display: block;
+      margin-top: 14px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(15px, 1.2vw, 17px);
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .formula-block {
+      max-width: 520px;
+      margin: 32px auto 0;
+    }
+
+    .formula-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 12px 0;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: clamp(13px, 1vw, 15px);
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+
+    .formula-line .calc { color: var(--muted); }
+
+    .formula-line .amount {
+      font-weight: 500;
+      color: var(--ink);
+      white-space: nowrap;
+      margin-left: 16px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .formula-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-top: 1px solid var(--ink);
+      padding-top: 22px;
+      margin-top: 8px;
+    }
+
+    .formula-total .label-text {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(18px, 1.5vw, 22px);
+      color: var(--ink);
+    }
+
+    .formula-total .amount {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(28px, 2.6vw, 38px);
+      color: var(--ink);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .slide-closing .closing-line {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      color: var(--muted);
+      margin-top: 80px;
+      text-transform: uppercase;
+    }
+
+    .slide-title .brand-line {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      color: var(--muted);
+      margin-top: 80px;
+    }
+
+    .nav {
+      position: fixed;
+      bottom: 36px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 48px;
+      z-index: 20;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding: 12px 4px;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-btn:hover { opacity: 0.5; }
+    .nav-btn:disabled { opacity: 0.2; cursor: default; }
+
+    .nav-btn .arrow {
+      font-family: var(--sans);
+      font-size: 16px;
+      font-style: normal;
+    }
+
+    .counter {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    .counter .total { color: var(--muted); }
+
+    .progress {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 20;
+    }
+
+    .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--line);
+      transition: background 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+    }
+
+    .dot.active {
+      background: var(--ink);
+      transform: scale(1.4);
+    }
+
+    @media (max-width: 880px) {
+      .slide { padding: 9vh 6vw; }
+      .two-col { grid-template-columns: 1fr; gap: 40px; }
+      .col-divider { display: none; }
+      .timeline { grid-template-columns: 1fr; gap: 36px; }
+      .result-grid { grid-template-columns: 1fr; }
+      .nav { padding: 0 24px; }
+      .brand-mark { top: 24px; font-size: 10px; }
+    }
+
+    @media (max-height: 700px) {
+      .eyebrow { margin-bottom: 32px; }
+      .timeline { margin: 36px auto 32px; }
+    }
+
+    @media print {
+      html, body { overflow: visible; height: auto; }
+      .deck { height: auto; min-height: 100vh; }
+      .slide {
+        position: relative;
+        page-break-after: always;
+        min-height: 100vh;
+        opacity: 1 !important;
+        visibility: visible !important;
+        padding: 10vh 8vw;
+      }
+      .brand-mark, .nav, .progress { position: absolute; visibility: hidden; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <div class="brand-mark">NICA VAN TILBURG</div>
+
+    <div class="slide slide-title active">
+      <div class="slide-inner">
+        <p class="eyebrow">— I —</p>
+        <h1>AI-training:<br />Custom GPT’s bouwen</h1>
+        <p class="subtitle">Twee sessies voor 32 deelnemers · Praktisch, concreet en toepasbaar op het werk.</p>
+        <div class="divider"></div>
+        <p class="body-text" style="max-width:420px">VOORSTEL VOOR NICA VAN TILBURG</p>
+        <p class="brand-line">Kleding · Brabant</p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-inner">
+        <p class="eyebrow">Waarom</p>
+        <h2>AI omarmen. Wel<br />met dezelfde taal.</h2>
+        <ul class="bullets">
+          <li>Jullie willen twee verdiepende trainingen voor in totaal 32 mensen</li>
+          <li>Het doel: AI begrijpen én zelf bruikbare Custom GPT’s bouwen voor dagelijkse werkzaamheden</li>
+          <li>Zonder gedeelde basis blijft AI-gebruik versnipperd — kansen en risico’s lopen uiteen</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-inner">
+        <p class="eyebrow">Opzet</p>
+        <h2>Twee trainingen.<br />Eén traject.</h2>
+        <p class="body-text" style="margin-bottom:32px">Twee sessies van 1,5 tot 2 uur — compact genoeg om in de agenda te passen, ruim genoeg om echt te bouwen.</p>
+        <div class="timeline">
+          <div class="phase">
+            <p class="when">Training 1</p>
+            <p class="title">AI begrijpen &amp; kansen</p>
+            <p class="desc">Begrippen, prompts en herkennen waar waarde zit in kleding, retail, marketing en klantcontact.</p>
+          </div>
+          <div class="phase">
+            <p class="when">Training 2</p>
+            <p class="title">Custom GPT bouwen</p>
+            <p class="desc">Hands-on: opzet, instructies, testen met echte werksituaties, veilig en effectief inzetten.</p>
+          </div>
+        </div>
+        <p class="meta"><span>32 deelnemers</span><span class="sep">·</span><span>2 × 1,5–2 uur</span></p>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-inner">
+        <p class="eyebrow">Training 1</p>
+        <h2>AI begrijpen &amp;<br />kansen herkennen</h2>
+        <ul class="bullets">
+          <li>Wat AI en Custom GPT’s zijn — in jullie context, zonder onnodig jargon</li>
+          <li>Hoe je goede prompts schrijft die betrouwbare, bruikbare output geven</li>
+          <li>Waar AI waarde kan toevoegen: kleding, retail, marketing, klantcontact</li>
+          <li>Welke werkprocessen geschikt zijn om te ondersteunen met een Custom GPT</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-inner">
+        <p class="eyebrow">Training 2</p>
+        <h2>Zelf een Custom GPT<br />bouwen</h2>
+        <div class="two-col">
+          <div class="col">
+            <h3>Hands-on</h3>
+            <ul>
+              <li>Zelf een Custom GPT opzetten</li>
+              <li>Instructies schrijven en verbeteren</li>
+              <li>Testen met realistische werksituaties</li>
+            </ul>
+          </div>
+          <div class="col-divider" aria-hidden="true"></div>
+          <div class="col">
+            <h3>Afronden</h3>
+            <ul>
+              <li>Feedback verwerken in het model</li>
+              <li>Veilig en effectief inzetten in de organisatie</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-inner">
+        <p class="eyebrow">Resultaat</p>
+        <h2>Concreet<br />na afloop</h2>
+        <div class="result-grid">
+          <div class="result-cell">
+            <div class="num">01</div>
+            <div class="name">Meer inzicht</div>
+            <div class="sub">AI en Custom GPT’s begrijpen — inclusief beperkingen en kansen.</div>
+          </div>
+          <div class="result-cell">
+            <div class="num">02</div>
+            <div class="name">Praktische skills</div>
+            <div class="sub">Zelfstandig werken met prompts en een GPT-constructie.</div>
+          </div>
+          <div class="result-cell">
+            <div class="num">03</div>
+            <div class="name">Ideeën voor het werk</div>
+            <div class="sub">Toepassingen die aansluiten op eigen taken binnen Nica.</div>
+          </div>
+          <div class="result-cell">
+            <div class="num">04</div>
+            <div class="name">Prototype</div>
+            <div class="sub">Minstens één bruikbaar GPT-concept om verder te ontwikkelen.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide">
+      <div class="slide-inner">
+        <p class="eyebrow">Investering</p>
+        <h2>Heldere opbouw.<br />Eén totaal.</h2>
+        <div class="hours-block">
+          <div class="label">Specificatie</div>
+          <div class="hours-row">
+            <span class="item">32 deelnemers × €50,00 p.p. (excl. btw)</span>
+            <span class="value">€&nbsp;1.600,00</span>
+          </div>
+          <div class="hours-row">
+            <span class="item">Reiskosten (excl. btw)</span>
+            <span class="value">€&nbsp;64,00</span>
+          </div>
+          <div class="hours-row subtotal">
+            <span class="item">Subtotaal excl. btw</span>
+            <span class="value">€&nbsp;1.664,00</span>
+          </div>
+          <div class="hours-row">
+            <span class="item">Btw 21%</span>
+            <span class="value">€&nbsp;349,44</span>
+          </div>
+          <div class="hours-row total-row">
+            <span class="item">Totaal incl. btw</span>
+            <span class="value">€&nbsp;2.013,44</span>
+          </div>
+        </div>
+        <div class="formula-block">
+          <div class="formula-line">
+            <span class="calc">Per persoon excl. btw (incl. reiskosten)</span>
+            <span class="amount">€&nbsp;52,00</span>
+          </div>
+          <div class="formula-line">
+            <span class="calc">Per persoon incl. btw</span>
+            <span class="amount">€&nbsp;62,92</span>
+          </div>
+          <div class="formula-total">
+            <span class="label-text">Trainingen totaal (excl. btw)</span>
+            <span class="amount">€&nbsp;1.600,00</span>
+          </div>
+        </div>
+        <p class="hours-totals">Bedragen in euro · voorstel onder voorbehoud van definitieve planning</p>
+      </div>
+    </div>
+
+    <div class="slide slide-closing">
+      <div class="slide-inner">
+        <p class="eyebrow" style="margin-bottom:40px">— TOT SLOT —</p>
+        <h1>Samen de agenda<br />en de teams pakken.</h1>
+        <p class="subtitle" style="margin-top:24px">Laten we data en indeling afstemmen — zodat beide sessies maximaal landen bij Nica van Tilburg.</p>
+        <p class="closing-line">Neem contact op · we reageren binnen één werkdag</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress" id="progress" role="tablist" aria-label="Slides"></div>
+
+  <nav class="nav" aria-label="Slide navigatie">
+    <button type="button" class="nav-btn" id="prev" aria-label="Vorige slide">
+      <span class="arrow">←</span> Vorige
+    </button>
+    <div class="counter"><span id="current">01</span> <span class="total">/ 08</span></div>
+    <button type="button" class="nav-btn" id="next" aria-label="Volgende slide">
+      Volgende <span class="arrow">→</span>
+    </button>
+  </nav>
+
+  <script>
+    (function () {
+      var slides = document.querySelectorAll(".slide");
+      var total = slides.length;
+      var prevBtn = document.getElementById("prev");
+      var nextBtn = document.getElementById("next");
+      var currentEl = document.getElementById("current");
+      var progress = document.getElementById("progress");
+      var index = 0;
+
+      for (var i = 0; i < total; i++) {
+        var dot = document.createElement("button");
+        dot.className = "dot" + (i === 0 ? " active" : "");
+        dot.setAttribute("aria-label", "Ga naar slide " + (i + 1));
+        dot.addEventListener("click", function (j) {
+          return function () { goTo(j); };
+        }(i));
+        progress.appendChild(dot);
+      }
+      var dots = progress.querySelectorAll(".dot");
+
+      function pad(n) {
+        return String(n).length < 2 ? "0" + n : String(n);
+      }
+
+      function update() {
+        for (var i = 0; i < total; i++) {
+          slides[i].classList.toggle("active", i === index);
+          dots[i].classList.toggle("active", i === index);
+        }
+        currentEl.textContent = pad(index + 1);
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === total - 1;
+      }
+
+      function goTo(i) {
+        if (i < 0 || i >= total) return;
+        index = i;
+        update();
+      }
+
+      function next() { goTo(index + 1); }
+      function prev() { goTo(index - 1); }
+
+      prevBtn.addEventListener("click", prev);
+      nextBtn.addEventListener("click", next);
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+          e.preventDefault();
+          next();
+        } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+          e.preventDefault();
+          prev();
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          goTo(0);
+        } else if (e.key === "End") {
+          e.preventDefault();
+          goTo(total - 1);
+        } else if (e.key >= "1" && e.key <= "9") {
+          var num = parseInt(e.key, 10) - 1;
+          if (num < total) {
+            e.preventDefault();
+            goTo(num);
+          }
+        }
+      });
+
+      var touchStartX = 0;
+      document.addEventListener("touchstart", function (e) {
+        touchStartX = e.changedTouches[0].clientX;
+      }, { passive: true });
+      document.addEventListener("touchend", function (e) {
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) {
+          if (dx < 0) next();
+          else prev();
+        }
+      }, { passive: true });
+
+      update();
+    })();
+  </script>
+</body>
+</html>
