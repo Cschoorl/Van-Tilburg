@@ -2,25 +2,28 @@
 <html lang="nl">
 <head>
   <meta charset="utf-8" />
-  <!-- Deck entrypoint for GitHub Pages — build 2026-05-15b -->
+  <!-- Deck Van Tilburg retail style — 2026-05-15c -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <link rel="canonical" href="https://cschoorl.github.io/Van-Tilburg/" />
-  <title>Nica van Tilburg — AI-training Custom GPT’s</title>
+  <title>Van Tilburg — AI-training Custom GPT’s</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #faf8f5;
-      --ink: #1a1a1a;
-      --muted: #8a8580;
-      --line: #e8e4dd;
-      --accent: #b8a98f;
-      --serif: "Cormorant Garamond", "Times New Roman", serif;
-      --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      --bg: #ffffff;
+      --card: #f5f5f0;
+      --lavender: #e6e6fa;
+      --yellow: #fff9c4;
+      --blue: #4a90e2;
+      --ink: #222222;
+      --muted: #6b6b6b;
+      --line: #e4e4df;
+      --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --sans: "Montserrat", -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -61,62 +64,98 @@
 
     .slide-inner {
       width: 100%;
-      max-width: 1100px;
+      max-width: 960px;
       text-align: center;
+      background: var(--card);
+      padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 2.5rem);
+      border: 1px solid var(--line);
+    }
+
+    .title-ribbons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 0 0 clamp(1.5rem, 4vw, 2.5rem);
+      max-width: 100%;
+    }
+
+    .ribbon {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 0.5rem;
+    }
+
+    .ribbon-lav { background: var(--lavender); color: #2d3950; }
+    .ribbon-yel { background: var(--yellow); color: #5a4a28; }
+    .ribbon-blu { background: var(--blue); color: #ffffff; }
+
+    .tilt {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: clamp(10px, 1.65vw, 13px);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transform: rotate(-11deg);
+      display: block;
+      line-height: 1.25;
     }
 
     .brand-mark {
       position: fixed;
-      top: 36px;
+      top: 32px;
       left: 50%;
       transform: translateX(-50%);
-      font-family: var(--sans);
-      font-size: 11px;
-      letter-spacing: 0.45em;
+      font-family: var(--serif);
+      font-size: clamp(12px, 1.2vw, 15px);
+      letter-spacing: 0.38em;
       color: var(--ink);
-      font-weight: 400;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-style: normal;
       z-index: 10;
     }
 
     .eyebrow {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: 14px;
-      letter-spacing: 0.32em;
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.38em;
       text-transform: uppercase;
-      color: var(--ink);
-      margin-bottom: 56px;
+      color: var(--muted);
+      margin-bottom: clamp(2rem, 4vw, 2.75rem);
     }
 
     h1 {
       font-family: var(--serif);
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(40px, 5.6vw, 78px);
-      line-height: 1.1;
-      letter-spacing: 0.01em;
-      margin-bottom: 28px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: clamp(36px, 5vw, 68px);
+      line-height: 1.08;
+      letter-spacing: 0.02em;
+      margin-bottom: 24px;
     }
 
     h2 {
       font-family: var(--serif);
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(34px, 4.4vw, 60px);
-      line-height: 1.15;
-      margin-bottom: 32px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: clamp(28px, 3.8vw, 52px);
+      line-height: 1.18;
+      margin-bottom: 28px;
     }
 
     .subtitle {
       font-family: var(--serif);
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(18px, 1.5vw, 21px);
+      font-style: normal;
+      font-weight: 400;
+      font-size: clamp(17px, 1.45vw, 21px);
       color: var(--ink);
-      line-height: 1.5;
+      line-height: 1.55;
       margin-bottom: 0;
-      max-width: 720px;
+      max-width: 640px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -124,36 +163,41 @@
     .body-text {
       font-family: var(--sans);
       font-style: normal;
-      font-weight: 300;
-      font-size: clamp(14px, 1.05vw, 16px);
-      line-height: 1.7;
-      color: var(--ink);
+      font-weight: 600;
+      font-size: 11px;
+      line-height: 1.6;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
       max-width: 580px;
       margin: 0 auto;
-      letter-spacing: 0.01em;
     }
 
     .divider {
-      width: 40px;
-      height: 1px;
-      background: var(--ink);
-      margin: 36px auto;
+      width: 48px;
+      height: 2px;
+      background: var(--blue);
+      margin: 28px auto;
+      opacity: 0.85;
     }
 
     .bullets {
       list-style: none;
-      max-width: 620px;
+      max-width: 580px;
       margin: 0 auto;
       text-align: center;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      padding: 0 8px;
     }
 
     .bullets li {
-      font-family: var(--sans);
+      font-family: var(--serif);
       font-style: normal;
-      font-weight: 300;
-      font-size: clamp(15px, 1.15vw, 17px);
-      line-height: 1.6;
-      padding: 20px 0;
+      font-weight: 400;
+      font-size: clamp(15px, 1.12vw, 17px);
+      line-height: 1.55;
+      padding: 18px 14px;
       border-bottom: 1px solid var(--line);
       letter-spacing: 0.01em;
     }
@@ -176,22 +220,22 @@
     .col h3 {
       font-family: var(--sans);
       font-style: normal;
-      font-weight: 500;
-      font-size: 12px;
+      font-weight: 600;
+      font-size: 11px;
       letter-spacing: 0.32em;
       text-transform: uppercase;
-      margin-bottom: 24px;
-      color: var(--ink);
+      margin-bottom: 20px;
+      color: var(--muted);
     }
 
     .col ul { list-style: none; }
 
     .col li {
-      font-family: var(--sans);
+      font-family: var(--serif);
       font-style: normal;
-      font-weight: 300;
+      font-weight: 400;
       font-size: clamp(14px, 1.05vw, 16px);
-      line-height: 1.7;
+      line-height: 1.65;
       padding: 12px 0;
       border-bottom: 1px solid var(--line);
       letter-spacing: 0.01em;
@@ -202,47 +246,56 @@
     .timeline {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      margin: 56px auto 48px;
-      max-width: 900px;
+      gap: 16px;
+      margin: 40px auto 40px;
+      max-width: 880px;
       text-align: center;
+    }
+
+    .phase {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      padding: 28px 18px;
     }
 
     .phase .when {
       font-family: var(--sans);
-      font-size: 11px;
-      letter-spacing: 0.3em;
+      font-size: 10px;
+      letter-spacing: 0.34em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 20px;
+      margin-bottom: 14px;
+      font-weight: 600;
     }
 
     .phase .title {
       font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(22px, 2vw, 28px);
-      margin-bottom: 14px;
+      font-style: normal;
+      font-weight: 600;
+      font-size: clamp(20px, 1.9vw, 26px);
+      margin-bottom: 12px;
+      color: var(--ink);
     }
 
     .phase .desc {
-      font-family: var(--sans);
+      font-family: var(--serif);
       font-style: normal;
-      font-weight: 300;
-      font-size: 13px;
-      line-height: 1.6;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.55;
       color: var(--muted);
       letter-spacing: 0.01em;
     }
 
     .meta {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: 18px;
-      letter-spacing: 0.05em;
-      color: var(--ink);
-      margin-top: 32px;
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 28px;
     }
 
     .meta span {
@@ -258,70 +311,76 @@
     .result-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: var(--line);
-      margin-top: 56px;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
+      gap: 12px;
+      margin-top: 36px;
+      background: transparent;
+      border: none;
     }
 
     .result-cell {
-      background: var(--bg);
-      padding: 36px 22px;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      padding: 26px 18px;
       text-align: center;
     }
 
     .result-cell .num {
       font-family: var(--sans);
-      font-size: 11px;
-      letter-spacing: 0.3em;
+      font-size: 10px;
+      letter-spacing: 0.34em;
       color: var(--muted);
-      margin-bottom: 14px;
+      margin-bottom: 10px;
+      font-weight: 600;
     }
 
     .result-cell .name {
       font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(18px, 1.5vw, 22px);
-      line-height: 1.35;
-      margin-bottom: 10px;
+      font-style: normal;
+      font-weight: 600;
+      font-size: clamp(17px, 1.45vw, 21px);
+      line-height: 1.3;
+      margin-bottom: 8px;
+      color: var(--ink);
     }
 
     .result-cell .sub {
-      font-family: var(--sans);
-      font-weight: 300;
+      font-family: var(--serif);
+      font-weight: 400;
       font-size: 13px;
       color: var(--muted);
-      line-height: 1.55;
+      line-height: 1.5;
       letter-spacing: 0.01em;
     }
 
     .hours-block {
       max-width: 520px;
-      margin: 48px auto 0;
+      margin: 40px auto 0;
       text-align: left;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      padding: 16px 20px 8px;
     }
 
     .hours-block > .label {
       font-family: var(--sans);
-      font-size: 11px;
-      letter-spacing: 0.32em;
+      font-size: 10px;
+      letter-spacing: 0.34em;
       text-transform: uppercase;
       color: var(--muted);
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
+      font-weight: 600;
     }
 
     .hours-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 14px 0;
+      padding: 12px 0;
       border-bottom: 1px solid var(--line);
-      font-family: var(--sans);
+      font-family: var(--serif);
       font-style: normal;
-      font-weight: 300;
+      font-weight: 400;
       font-size: clamp(13px, 1vw, 15px);
       line-height: 1.5;
       letter-spacing: 0.01em;
@@ -329,7 +388,9 @@
 
     .hours-row .item { color: var(--ink); }
     .hours-row .value {
-      font-weight: 500;
+      font-weight: 600;
+      font-family: var(--sans);
+      font-size: 13px;
       color: var(--ink);
       white-space: nowrap;
       margin-left: 16px;
@@ -338,61 +399,64 @@
 
     .hours-row.subtotal {
       border-bottom: none;
-      padding-top: 18px;
+      padding-top: 14px;
       margin-top: 4px;
-      border-top: 1px solid var(--ink);
+      border-top: 2px solid var(--blue);
       font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(15px, 1.2vw, 17px);
+      font-style: normal;
+      font-weight: 600;
+      font-size: clamp(15px, 1.15vw, 17px);
     }
 
-    .hours-row.subtotal .value { font-weight: 500; }
+    .hours-row.subtotal .value { font-weight: 700; }
 
     .hours-row.total-row {
       border-bottom: none;
-      padding-top: 12px;
+      padding-top: 10px;
       font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(16px, 1.3vw, 19px);
+      font-style: normal;
+      font-weight: 600;
+      font-size: clamp(16px, 1.25vw, 18px);
     }
 
     .hours-totals {
-      margin-top: 28px;
+      margin-top: 20px;
       text-align: center;
       font-family: var(--sans);
       font-style: normal;
-      font-weight: 300;
-      font-size: 12px;
+      font-weight: 400;
+      font-size: 11px;
       color: var(--muted);
-      line-height: 1.9;
-      letter-spacing: 0.04em;
+      line-height: 1.8;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     .hours-totals .grand {
       display: block;
-      margin-top: 14px;
+      margin-top: 10px;
       font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(15px, 1.2vw, 17px);
+      font-style: normal;
+      font-weight: 500;
+      font-size: clamp(14px, 1.1vw, 16px);
       color: var(--ink);
       letter-spacing: 0.02em;
+      text-transform: none;
     }
 
     .formula-block {
       max-width: 520px;
-      margin: 32px auto 0;
+      margin: 24px auto 0;
+      padding-top: 8px;
     }
 
     .formula-line {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: 12px 0;
-      font-family: var(--sans);
-      font-weight: 300;
+      padding: 10px 0;
+      font-family: var(--serif);
+      font-weight: 400;
       font-size: clamp(13px, 1vw, 15px);
       line-height: 1.5;
       letter-spacing: 0.01em;
@@ -402,7 +466,9 @@
     .formula-line .calc { color: var(--muted); }
 
     .formula-line .amount {
-      font-weight: 500;
+      font-weight: 600;
+      font-family: var(--sans);
+      font-size: 13px;
       color: var(--ink);
       white-space: nowrap;
       margin-left: 16px;
@@ -413,55 +479,58 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      border-top: 1px solid var(--ink);
-      padding-top: 22px;
-      margin-top: 8px;
+      border-top: 2px solid var(--blue);
+      padding-top: 18px;
+      margin-top: 6px;
     }
 
     .formula-total .label-text {
       font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(18px, 1.5vw, 22px);
+      font-style: normal;
+      font-weight: 600;
+      font-size: clamp(17px, 1.45vw, 21px);
       color: var(--ink);
     }
 
     .formula-total .amount {
       font-family: var(--serif);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(28px, 2.6vw, 38px);
-      color: var(--ink);
+      font-style: normal;
+      font-weight: 600;
+      font-size: clamp(26px, 2.4vw, 34px);
+      color: var(--blue);
       line-height: 1;
       font-variant-numeric: tabular-nums;
     }
 
     .slide-closing .closing-line {
       font-family: var(--sans);
-      font-size: 11px;
-      letter-spacing: 0.5em;
+      font-size: 10px;
+      letter-spacing: 0.42em;
       color: var(--muted);
-      margin-top: 80px;
+      margin-top: 56px;
       text-transform: uppercase;
+      font-weight: 500;
     }
 
     .slide-title .brand-line {
       font-family: var(--sans);
-      font-size: 11px;
-      letter-spacing: 0.5em;
+      font-size: 10px;
+      letter-spacing: 0.38em;
       color: var(--muted);
-      margin-top: 80px;
+      margin-top: 48px;
+      text-transform: uppercase;
+      font-weight: 500;
     }
 
     .nav {
       position: fixed;
-      bottom: 36px;
+      bottom: 28px;
       left: 0;
       right: 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 48px;
+      padding: 0 40px;
       z-index: 20;
     }
 
@@ -469,52 +538,52 @@
       background: transparent;
       border: none;
       cursor: pointer;
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 300;
-      font-size: 14px;
-      letter-spacing: 0.2em;
+      font-family: var(--sans);
+      font-style: normal;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--ink);
-      padding: 12px 4px;
-      transition: opacity 0.3s ease;
+      padding: 10px 4px;
+      transition: opacity 0.3s ease, color 0.3s ease;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .nav-btn:hover { opacity: 0.5; }
-    .nav-btn:disabled { opacity: 0.2; cursor: default; }
+    .nav-btn:hover { opacity: 0.55; color: var(--blue); }
+    .nav-btn:disabled { opacity: 0.25; cursor: default; }
 
     .nav-btn .arrow {
       font-family: var(--sans);
-      font-size: 16px;
+      font-size: 14px;
       font-style: normal;
     }
 
     .counter {
       font-family: var(--sans);
-      font-size: 11px;
-      letter-spacing: 0.4em;
-      color: var(--ink);
-      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.45em;
+      color: var(--muted);
+      font-weight: 600;
     }
 
-    .counter .total { color: var(--muted); }
+    .counter .total { color: #c9c9c4; }
 
     .progress {
       position: fixed;
-      bottom: 80px;
+      bottom: 72px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 10px;
+      gap: 8px;
       z-index: 20;
     }
 
     .dot {
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: var(--line);
       transition: background 0.3s ease, transform 0.3s ease;
@@ -524,18 +593,20 @@
     }
 
     .dot.active {
-      background: var(--ink);
-      transform: scale(1.4);
+      background: var(--blue);
+      transform: scale(1.35);
     }
 
     @media (max-width: 880px) {
       .slide { padding: 9vh 6vw; }
+      .title-ribbons { grid-template-columns: 1fr; gap: 8px; }
+      .ribbon { min-height: 64px; }
       .two-col { grid-template-columns: 1fr; gap: 40px; }
       .col-divider { display: none; }
       .timeline { grid-template-columns: 1fr; gap: 36px; }
       .result-grid { grid-template-columns: 1fr; }
       .nav { padding: 0 24px; }
-      .brand-mark { top: 24px; font-size: 10px; }
+      .brand-mark { top: 22px; font-size: 11px; }
     }
 
     @media (max-height: 700px) {
@@ -560,15 +631,20 @@
 </head>
 <body>
   <div class="deck">
-    <div class="brand-mark">NICA VAN TILBURG</div>
+    <div class="brand-mark">VAN TILBURG</div>
 
     <div class="slide slide-title active">
       <div class="slide-inner">
+        <div class="title-ribbons" aria-hidden="true">
+          <div class="ribbon ribbon-lav"><span class="tilt">32 deelnemers</span></div>
+          <div class="ribbon ribbon-yel"><span class="tilt">2 sessies</span></div>
+          <div class="ribbon ribbon-blu"><span class="tilt">Custom GPT</span></div>
+        </div>
         <p class="eyebrow">— I —</p>
         <h1>AI-training:<br />Custom GPT’s bouwen</h1>
         <p class="subtitle">Twee sessies voor 32 deelnemers · Praktisch, concreet en toepasbaar op het werk.</p>
         <div class="divider"></div>
-        <p class="body-text" style="max-width:420px">VOORSTEL VOOR NICA VAN TILBURG</p>
+        <p class="body-text" style="max-width:480px">VOORSTEL VOOR VAN TILBURG</p>
         <p class="brand-line">Kleding · Brabant</p>
       </div>
     </div>
@@ -662,7 +738,7 @@
           <div class="result-cell">
             <div class="num">03</div>
             <div class="name">Ideeën voor het werk</div>
-            <div class="sub">Toepassingen die aansluiten op eigen taken binnen Nica.</div>
+            <div class="sub">Toepassingen die aansluiten op eigen taken binnen Van Tilburg.</div>
           </div>
           <div class="result-cell">
             <div class="num">04</div>
@@ -722,7 +798,7 @@
       <div class="slide-inner">
         <p class="eyebrow" style="margin-bottom:40px">— TOT SLOT —</p>
         <h1>Samen de agenda<br />en de teams pakken.</h1>
-        <p class="subtitle" style="margin-top:24px">Laten we data en indeling afstemmen — zodat beide sessies maximaal landen bij Nica van Tilburg.</p>
+        <p class="subtitle" style="margin-top:24px">Laten we data en indeling afstemmen — zodat beide sessies maximaal landen bij Van Tilburg.</p>
         <p class="closing-line">Neem contact op · we reageren binnen één werkdag</p>
       </div>
     </div>
