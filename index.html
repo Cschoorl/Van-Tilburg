@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="utf-8" />
-  <!-- Deck Van Tilburg retail style — 2026-05-15c -->
+  <!-- Fonts: Playfair Display (logo/kopteksten) + Nunito (promoblokken / UI) — Van Tilburg webstijl -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
@@ -11,19 +11,20 @@
   <title>Van Tilburg — AI-training Custom GPT’s</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #ffffff;
-      --card: #f5f5f0;
-      --lavender: #e6e6fa;
-      --yellow: #fff9c4;
-      --blue: #4a90e2;
-      --ink: #222222;
-      --muted: #6b6b6b;
-      --line: #e4e4df;
-      --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-      --sans: "Montserrat", -apple-system, BlinkMacSystemFont, sans-serif;
+      --card: #f4f3ef;
+      --periwinkle: #e4eaf7;
+      --butter: #fdf6e4;
+      --blue-strong: #2b6fd6;
+      --blue-alert: #2563eb;
+      --ink: #1a1814;
+      --muted: #5c5854;
+      --line: #e5e3dd;
+      --display: "Playfair Display", Georgia, "Times New Roman", serif;
+      --accent: "Nunito", system-ui, -apple-system, sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,7 +33,7 @@
       height: 100%;
       background: var(--bg);
       color: var(--ink);
-      font-family: var(--serif);
+      font-family: var(--display);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow: hidden;
@@ -69,6 +70,7 @@
       background: var(--card);
       padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 2.5rem);
       border: 1px solid var(--line);
+      border-radius: 2px;
     }
 
     .title-ribbons {
@@ -79,27 +81,28 @@
       max-width: 100%;
     }
 
+    .ribbon-lav { background: var(--periwinkle); color: #152a52; }
+    .ribbon-yel { background: var(--butter); color: #3d3428; }
+    .ribbon-blu { background: var(--blue-alert); color: #ffffff; }
+
     .ribbon {
       min-height: 72px;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 0.85rem 0.5rem;
+      border-radius: 4px;
     }
 
-    .ribbon-lav { background: var(--lavender); color: #2d3950; }
-    .ribbon-yel { background: var(--yellow); color: #5a4a28; }
-    .ribbon-blu { background: var(--blue); color: #ffffff; }
-
     .tilt {
-      font-family: var(--sans);
-      font-weight: 700;
-      font-size: clamp(10px, 1.65vw, 13px);
-      letter-spacing: 0.14em;
+      font-family: var(--accent);
+      font-weight: 800;
+      font-size: clamp(11px, 1.75vw, 14px);
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      transform: rotate(-11deg);
+      transform: rotate(-8deg);
       display: block;
-      line-height: 1.25;
+      line-height: 1.3;
     }
 
     .brand-mark {
@@ -107,9 +110,9 @@
       top: 32px;
       left: 50%;
       transform: translateX(-50%);
-      font-family: var(--serif);
-      font-size: clamp(12px, 1.2vw, 15px);
-      letter-spacing: 0.38em;
+      font-family: var(--display);
+      font-size: clamp(13px, 1.35vw, 19px);
+      letter-spacing: 0.42em;
       color: var(--ink);
       font-weight: 600;
       text-transform: uppercase;
@@ -118,20 +121,20 @@
     }
 
     .eyebrow {
-      font-family: var(--sans);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 500;
-      font-size: 11px;
-      letter-spacing: 0.38em;
+      font-size: 12px;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: clamp(2rem, 4vw, 2.75rem);
     }
 
     h1 {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-style: normal;
-      font-weight: 500;
+      font-weight: 600;
       font-size: clamp(36px, 5vw, 68px);
       line-height: 1.08;
       letter-spacing: 0.02em;
@@ -139,16 +142,16 @@
     }
 
     h2 {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-style: normal;
-      font-weight: 500;
+      font-weight: 600;
       font-size: clamp(28px, 3.8vw, 52px);
       line-height: 1.18;
       margin-bottom: 28px;
     }
 
     .subtitle {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 400;
       font-size: clamp(17px, 1.45vw, 21px);
@@ -161,7 +164,7 @@
     }
 
     .body-text {
-      font-family: var(--sans);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 600;
       font-size: 11px;
@@ -176,7 +179,7 @@
     .divider {
       width: 48px;
       height: 2px;
-      background: var(--blue);
+      background: var(--blue-strong);
       margin: 28px auto;
       opacity: 0.85;
     }
@@ -189,10 +192,11 @@
       background: #ffffff;
       border: 1px solid var(--line);
       padding: 0 8px;
+      border-radius: 2px;
     }
 
     .bullets li {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 400;
       font-size: clamp(15px, 1.12vw, 17px);
@@ -218,11 +222,11 @@
     }
 
     .col h3 {
-      font-family: var(--sans);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 600;
-      font-size: 11px;
-      letter-spacing: 0.32em;
+      font-size: 12px;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       margin-bottom: 20px;
       color: var(--muted);
@@ -231,7 +235,7 @@
     .col ul { list-style: none; }
 
     .col li {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 400;
       font-size: clamp(14px, 1.05vw, 16px);
@@ -256,20 +260,21 @@
       background: #ffffff;
       border: 1px solid var(--line);
       padding: 28px 18px;
+      border-radius: 2px;
     }
 
     .phase .when {
-      font-family: var(--sans);
-      font-size: 10px;
-      letter-spacing: 0.34em;
+      font-family: var(--display);
+      font-size: 11px;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 14px;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     .phase .title {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 600;
       font-size: clamp(20px, 1.9vw, 26px);
@@ -278,7 +283,7 @@
     }
 
     .phase .desc {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 400;
       font-size: 14px;
@@ -288,12 +293,12 @@
     }
 
     .meta {
-      font-family: var(--sans);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 500;
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: none;
       color: var(--muted);
       margin-top: 28px;
     }
@@ -322,19 +327,20 @@
       border: 1px solid var(--line);
       padding: 26px 18px;
       text-align: center;
+      border-radius: 2px;
     }
 
     .result-cell .num {
-      font-family: var(--sans);
+      font-family: var(--display);
       font-size: 10px;
-      letter-spacing: 0.34em;
+      letter-spacing: 0.26em;
       color: var(--muted);
       margin-bottom: 10px;
       font-weight: 600;
     }
 
     .result-cell .name {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 600;
       font-size: clamp(17px, 1.45vw, 21px);
@@ -344,7 +350,7 @@
     }
 
     .result-cell .sub {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-weight: 400;
       font-size: 13px;
       color: var(--muted);
@@ -362,9 +368,9 @@
     }
 
     .hours-block > .label {
-      font-family: var(--sans);
-      font-size: 10px;
-      letter-spacing: 0.34em;
+      font-family: var(--display);
+      font-size: 11px;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--muted);
       text-align: center;
@@ -378,7 +384,7 @@
       align-items: baseline;
       padding: 12px 0;
       border-bottom: 1px solid var(--line);
-      font-family: var(--serif);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 400;
       font-size: clamp(13px, 1vw, 15px);
@@ -389,7 +395,7 @@
     .hours-row .item { color: var(--ink); }
     .hours-row .value {
       font-weight: 600;
-      font-family: var(--sans);
+      font-family: var(--accent);
       font-size: 13px;
       color: var(--ink);
       white-space: nowrap;
@@ -401,8 +407,8 @@
       border-bottom: none;
       padding-top: 14px;
       margin-top: 4px;
-      border-top: 2px solid var(--blue);
-      font-family: var(--serif);
+      border-top: 2px solid var(--blue-strong);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 600;
       font-size: clamp(15px, 1.15vw, 17px);
@@ -413,7 +419,7 @@
     .hours-row.total-row {
       border-bottom: none;
       padding-top: 10px;
-      font-family: var(--serif);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 600;
       font-size: clamp(16px, 1.25vw, 18px);
@@ -422,7 +428,7 @@
     .hours-totals {
       margin-top: 20px;
       text-align: center;
-      font-family: var(--sans);
+      font-family: var(--accent);
       font-style: normal;
       font-weight: 400;
       font-size: 11px;
@@ -435,7 +441,7 @@
     .hours-totals .grand {
       display: block;
       margin-top: 10px;
-      font-family: var(--serif);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 500;
       font-size: clamp(14px, 1.1vw, 16px);
@@ -455,7 +461,7 @@
       justify-content: space-between;
       align-items: baseline;
       padding: 10px 0;
-      font-family: var(--serif);
+      font-family: var(--display);
       font-weight: 400;
       font-size: clamp(13px, 1vw, 15px);
       line-height: 1.5;
@@ -467,7 +473,7 @@
 
     .formula-line .amount {
       font-weight: 600;
-      font-family: var(--sans);
+      font-family: var(--accent);
       font-size: 13px;
       color: var(--ink);
       white-space: nowrap;
@@ -479,13 +485,13 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      border-top: 2px solid var(--blue);
+      border-top: 2px solid var(--blue-strong);
       padding-top: 18px;
       margin-top: 6px;
     }
 
     .formula-total .label-text {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 600;
       font-size: clamp(17px, 1.45vw, 21px);
@@ -493,19 +499,19 @@
     }
 
     .formula-total .amount {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-style: normal;
       font-weight: 600;
       font-size: clamp(26px, 2.4vw, 34px);
-      color: var(--blue);
+      color: var(--blue-strong);
       line-height: 1;
       font-variant-numeric: tabular-nums;
     }
 
     .slide-closing .closing-line {
-      font-family: var(--sans);
-      font-size: 10px;
-      letter-spacing: 0.42em;
+      font-family: var(--display);
+      font-size: 11px;
+      letter-spacing: 0.28em;
       color: var(--muted);
       margin-top: 56px;
       text-transform: uppercase;
@@ -513,9 +519,9 @@
     }
 
     .slide-title .brand-line {
-      font-family: var(--sans);
-      font-size: 10px;
-      letter-spacing: 0.38em;
+      font-family: var(--display);
+      font-size: 11px;
+      letter-spacing: 0.2em;
       color: var(--muted);
       margin-top: 48px;
       text-transform: uppercase;
@@ -538,7 +544,7 @@
       background: transparent;
       border: none;
       cursor: pointer;
-      font-family: var(--sans);
+      font-family: var(--accent);
       font-style: normal;
       font-weight: 600;
       font-size: 11px;
@@ -552,17 +558,17 @@
       gap: 10px;
     }
 
-    .nav-btn:hover { opacity: 0.55; color: var(--blue); }
+    .nav-btn:hover { opacity: 0.55; color: var(--blue-strong); }
     .nav-btn:disabled { opacity: 0.25; cursor: default; }
 
     .nav-btn .arrow {
-      font-family: var(--sans);
+      font-family: var(--accent);
       font-size: 14px;
       font-style: normal;
     }
 
     .counter {
-      font-family: var(--sans);
+      font-family: var(--accent);
       font-size: 10px;
       letter-spacing: 0.45em;
       color: var(--muted);
@@ -593,7 +599,7 @@
     }
 
     .dot.active {
-      background: var(--blue);
+      background: var(--blue-strong);
       transform: scale(1.35);
     }
 
