@@ -11,7 +11,7 @@ Het deck is opgezet in dezelfde **editoriale stijl** als het Josh V-voorstel: ty
 
 ## Wat staat erin?
 
-Acht slides: titel, waarom deze training, opzet (twee sessies), training 1, training 2, verwacht resultaat, investering, afsluiting met call-to-action. Inhoud en bedragen volgen het offertekader (32 deelnemers, prijzen excl./incl. btw).
+Zes slides: titel, behoefte (enquête), aanpak (twee sessies), diepte per training, investering, afsluiting met call-to-action. Inhoud en bedragen volgen het offertekader (32 deelnemers, prijzen excl./incl. btw).
 
 ## Belangrijk: welke URL?
 
@@ -45,8 +45,8 @@ Of dubbelklik `index.html` in Finder.
 
 ## Presenteren
 
-- Onderaan: **Vorige** / **Volgende** en teller **01 / 07**; stippen om naar een slide te springen.
-- **Toetsenbord:** pijl links/rechts, spatie, Page Up/Down; `Home` / `End`; cijfers **`1`–`7`** voor een specifieke slide.
+- Onderaan: **Vorige** / **Volgende** en teller **01 / 06**; stippen om naar een slide te springen.
+- **Toetsenbord:** pijl links/rechts, spatie, Page Up/Down; `Home` / `End`; cijfers **`1`–`6`** voor een specifieke slide.
 - **Touch:** swipe links of rechts.
 
 ## PDF
