@@ -413,6 +413,67 @@
       font-variant-numeric: tabular-nums;
     }
 
+    /* Investering-slide: compactere kop en tarieftabel */
+    .slide-investment h2 {
+      font-size: clamp(26px, 3.35vw, 46px);
+      margin-bottom: 22px;
+    }
+
+    .slide-investment .hours-block {
+      max-width: 480px;
+      margin-top: 36px;
+    }
+
+    .slide-investment .hours-block > .label {
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      margin-bottom: 16px;
+    }
+
+    .slide-investment .hours-row {
+      padding: 9px 0;
+      font-size: clamp(12px, 0.9vw, 14px);
+    }
+
+    .slide-investment .hours-row.subtotal {
+      padding-top: 14px;
+      margin-top: 2px;
+      font-size: clamp(13px, 1.05vw, 16px);
+    }
+
+    .slide-investment .hours-row.total-row {
+      padding-top: 10px;
+      font-size: clamp(14px, 1.1vw, 17px);
+    }
+
+    .slide-investment .formula-block {
+      max-width: 480px;
+      margin-top: 22px;
+    }
+
+    .slide-investment .formula-line {
+      padding: 8px 0;
+      font-size: clamp(12px, 0.9vw, 14px);
+    }
+
+    .slide-investment .formula-total {
+      padding-top: 16px;
+      margin-top: 4px;
+    }
+
+    .slide-investment .formula-total .label-text {
+      font-size: clamp(15px, 1.2vw, 20px);
+    }
+
+    .slide-investment .formula-total .amount {
+      font-size: clamp(22px, 2vw, 32px);
+    }
+
+    .slide-investment .hours-totals {
+      margin-top: 18px;
+      font-size: 10px;
+    }
+
     .slide-closing .closing-line {
       font-family: var(--ui);
       font-size: 11px;
@@ -587,7 +648,7 @@
     </div>
 
     <!-- 5 Investering — zelfde patroon als Josh (tabel + formule) -->
-    <div class="slide">
+    <div class="slide slide-investment">
       <div class="slide-inner">
         <p class="eyebrow">Investering</p>
         <h2>Per deelnemer opgebouwd.<br />Eén totaalbeeld.</h2>
